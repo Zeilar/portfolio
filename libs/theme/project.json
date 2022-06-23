@@ -1,0 +1,14 @@
+{
+	"sourceRoot": "libs/theme/src",
+	"projectType": "library",
+	"targets": {
+		"types": {
+			"executor": "nx:run-commands",
+			"options": {
+				"__unparsed__": [],
+				"command": "chakra-cli tokens libs/theme/src/lib/index.ts"
+			}
+		}
+	},
+	"tags": []
+}

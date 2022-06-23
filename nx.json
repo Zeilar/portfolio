@@ -1,34 +1,51 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "portfolio",
-  "affected": {
-    "defaultBase": "master"
-  },
-  "implicitDependencies": {
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
-    ".eslintrc.json": "*"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
-      }
-    }
-  },
-  "targetDefaults": {
-    "build": {
-      "dependsOn": [
-        "^build"
-      ]
-    }
-  }
+	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"npmScope": "portfolio",
+	"affected": {
+		"defaultBase": "master"
+	},
+	"implicitDependencies": {
+		"package.json": {
+			"dependencies": "*",
+			"devDependencies": "*"
+		},
+		".eslintrc.json": "*"
+	},
+	"tasksRunnerOptions": {
+		"default": {
+			"runner": "@nrwl/nx-cloud",
+			"options": {
+				"cacheableOperations": ["build", "lint", "test", "e2e"],
+				"accessToken": "NDY4M2I0NzAtMWZkYi00ZDA5LTg4YTAtNjJmZmI1MGVkYTlmfHJlYWQtd3JpdGU="
+			}
+		}
+	},
+	"targetDefaults": {
+		"build": {
+			"dependsOn": ["^build"]
+		}
+	},
+	"generators": {
+		"@nrwl/react": {
+			"application": {
+				"style": "none",
+				"linter": "eslint",
+				"babel": true
+			},
+			"component": {
+				"style": "none"
+			},
+			"library": {
+				"style": "none",
+				"linter": "eslint"
+			}
+		},
+		"@nrwl/next": {
+			"application": {
+				"style": "@emotion/styled",
+				"linter": "eslint"
+			}
+		}
+	},
+	"defaultProject": "frontend"
 }
