@@ -5,6 +5,7 @@ import { config } from "./config";
 import { fonts } from "./fonts";
 import { shadows } from "./shadows";
 import { styles } from "./styles";
+import { sizes } from "./sizes";
 // import { withDefaults } from "./withDefaults";
 // import { breakpoints } from "./breakpoints";
 // import { textStyles } from "./textStyles";
@@ -18,6 +19,7 @@ export default extendTheme(
 		fonts,
 		components: { ...theme.components, ...components },
 		styles,
+		sizes,
 		// breakpoints,
 		// textStyles,
 		// radii,

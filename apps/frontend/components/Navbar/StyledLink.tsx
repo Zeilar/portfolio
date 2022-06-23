@@ -18,6 +18,7 @@ export default function StyledLink({ href, ...props }: Props) {
 				fontWeight={500}
 				color="gray.500"
 				fontSize="lg"
+				userSelect="none"
 				_after={{
 					content: `""`,
 					pos: "absolute",

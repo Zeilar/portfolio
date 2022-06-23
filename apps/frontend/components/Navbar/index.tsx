@@ -1,4 +1,4 @@
-import { Box, Container, ContainerProps, Flex } from "@chakra-ui/react";
+import { Box, Container, ContainerProps, Flex, Link } from "@chakra-ui/react";
 import { useEffect, useMemo, useState } from "react";
 import StyledLink from "./StyledLink";
 import NextLink from "next/link";
@@ -44,11 +44,15 @@ export default function Navbar() {
 	return (
 		<Box as="header" pos="sticky" top={0} py={10} transition="0.15s" {...animatedStyles}>
 			<Container maxW="container.xl">
-				<Flex as="nav" gap="3.5rem" alignItems="center">
-					<Box as="li" mr={10}>
-						<NextLink href="/">🎈</NextLink>
-					</Box>
-					<Flex as="ul" gap="3.5rem">
+				<Flex as="ul" gap="3.5rem">
+					<Flex as="nav" gap="3.5rem" alignItems="center">
+						<Box as="li" mr="3.5rem">
+							<NextLink href="/" passHref>
+								<Link userSelect="none" fontSize="4xl" color="accent">
+									A
+								</Link>
+							</NextLink>
+						</Box>
 						<li>
 							<StyledLink href="/">Home</StyledLink>
 						</li>
