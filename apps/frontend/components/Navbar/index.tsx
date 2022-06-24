@@ -12,7 +12,7 @@ export default function Navbar() {
 
 	useEffect(() => {
 		function onScroll() {
-			setIsAnimated(window.scrollY > THRESHOLD);
+			// setIsAnimated(window.scrollY > THRESHOLD);
 		}
 		window.addEventListener("scroll", onScroll);
 		return () => {

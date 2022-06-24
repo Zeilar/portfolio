@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<>
 			<Head>
-				<title>Welcome to frontend!</title>
+				<title>Angelin</title>
 			</Head>
 			<ChakraProvider theme={theme}>
 				<Navbar />
