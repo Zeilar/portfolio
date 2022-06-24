@@ -5,6 +5,7 @@ import NextLink from "next/link";
 import { getProjects } from "../common/queries";
 import { Project } from "./projects";
 import FeaturedProject from "../components/FeaturedProject";
+import theme from "@theme";
 
 interface Props {
 	featuredProjects: Project[];
@@ -31,7 +32,7 @@ export default function Index({ featuredProjects }: Props) {
 							fontSize="242px"
 							y="228.74254"
 							x="161.54519"
-							fill="var(--chakra-colors-purple-900)"
+							fill={theme.colors.purple[900]}
 							opacity={0.2}
 						>
 							A
@@ -45,7 +46,7 @@ export default function Index({ featuredProjects }: Props) {
 						Application out.
 					</Text>
 					<Box as="hr" w="10rem" h={1} bgColor="accent" my={10} rounded="full" />
-					<Text color="gray.400" lineHeight="7">
+					<Text color="gray.200" lineHeight="7">
 						Hi, I&apos;m Philip, a web developer from Sweden.
 						<br />
 						Professional nerd who loves to build cool things.

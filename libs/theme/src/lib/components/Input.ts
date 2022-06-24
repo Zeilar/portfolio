@@ -1,4 +1,5 @@
 import { StyleConfig } from "@chakra-ui/theme-tools";
+import { colors } from "../colors";
 
 export const Input: StyleConfig = {
 	variants: {
@@ -14,7 +15,7 @@ export const Input: StyleConfig = {
 				_focusVisible: {
 					borderColor: "blue.500",
 					bgColor: "blackAlpha.100",
-					boxShadow: "0 0 0 1px var(--chakra-colors-blue-500)",
+					boxShadow: `0 0 0 1px ${colors.accent}`,
 				},
 			},
 		},
@@ -25,7 +26,7 @@ export const Input: StyleConfig = {
 				},
 				_focusVisible: {
 					borderColor: "blue.500",
-					boxShadow: "0 1px 0 0 var(--chakra-colors-blue-500)",
+					boxShadow: `0 1px 0 0 ${colors.accent}`,
 				},
 			},
 		},

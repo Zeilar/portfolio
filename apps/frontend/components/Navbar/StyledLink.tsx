@@ -16,7 +16,7 @@ export default function StyledLink({ href, ...props }: Props) {
 				pos="relative"
 				py={2}
 				fontWeight={500}
-				color="gray.500"
+				color="gray.300"
 				fontSize="lg"
 				userSelect="none"
 				_after={{

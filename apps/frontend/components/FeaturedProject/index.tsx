@@ -1,4 +1,4 @@
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Flex, Link, Text } from "@chakra-ui/react";
 import { Project } from "../../pages/projects";
 import NextImage from "next/image";
 import NextLink from "next/link";
@@ -22,7 +22,7 @@ export default function FeaturedProject({ project }: Props) {
 				bgColor="gray.700"
 				rounded="lg"
 				transitionDuration="0.5s"
-				_hover={{ transform: "scale(1.05)" }}
+				_hover={{ transform: "scale(1.05)", bgColor: "gray.600" }}
 			>
 				<NextImage src={project.previewImage} width="100%" height="60rem" layout="responsive" />
 				<Flex p={8} flexDir="column">
@@ -31,7 +31,7 @@ export default function FeaturedProject({ project }: Props) {
 					</Text>
 					<Text
 						fontSize="sm"
-						color="gray.400"
+						color="gray.200"
 						lineHeight="6"
 						mt={4}
 						sx={{ "-webkit-line-clamp": "10", "-webkit-box-orient": "vertical" }}
@@ -41,7 +41,7 @@ export default function FeaturedProject({ project }: Props) {
 					>
 						{project.description}
 					</Text>
-					<Text fontSize="sm" color="gray.600" mt={4}>
+					<Text fontSize="sm" color="gray.400" mt={4}>
 						{parseDate(project.releaseDate)}
 					</Text>
 				</Flex>
