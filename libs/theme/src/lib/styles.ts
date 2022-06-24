@@ -4,8 +4,9 @@ export const styles = {
 			bgColor: "gray.800",
 			color: "text",
 		},
-		"#root": {
+		"#__next": {
 			minH: "100vh",
+			pt: 100,
 		},
 		"::selection": {
 			bgColor: "purple.900",

@@ -18,7 +18,7 @@ export default function FeaturedProject({ project }: Props) {
 			<Link
 				display="flex"
 				flexDir="column"
-				boxShadow="md"
+				boxShadow="lg"
 				bgColor="gray.700"
 				rounded="lg"
 				transitionDuration="0.5s"
