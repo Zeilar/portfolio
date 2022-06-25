@@ -1,5 +1,5 @@
 import { Flex, Link, Text } from "@chakra-ui/react";
-import { Project } from "../../pages/projects";
+import { Project } from "../../types/project";
 import NextImage from "next/image";
 import NextLink from "next/link";
 

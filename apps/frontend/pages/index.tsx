@@ -5,12 +5,13 @@ import avatar from "../assets/images/avatar.jpg";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { getProjects, getTechnologies } from "../common/queries";
-import { Project, Technology } from "./projects";
 import FeaturedProject from "../components/FeaturedProject";
 import theme from "@theme";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import UnderlineHeader from "../components/UnderlineHeader";
 import TechnologyCard from "../components/TechnologyCard";
+import { Project } from "../types/project";
+import { Technology } from "../types/technology";
 
 interface Props {
 	featuredProjects: Project[];
