@@ -64,8 +64,9 @@ export default function Index({ featuredProjects, technologies }: Props) {
 							Professional nerd who loves to build cool things.
 						</Text>
 						<NextLink passHref href="/projects">
-							<Button as={Link} mt={10}>
+							<Button as={Link} mt={10} variant="primary-link">
 								Explore Projects
+								<ArrowForwardIcon />
 							</Button>
 						</NextLink>
 					</Box>
@@ -85,9 +86,9 @@ export default function Index({ featuredProjects, technologies }: Props) {
 				<Flex justifyContent="space-between" alignItems="center" py="5rem">
 					<UnderlineHeader label="Featured Projects" />
 					<NextLink href="/projects" passHref>
-						<Button as={Link}>
+						<Button as={Link} variant="primary-link">
 							All Projects
-							<ArrowForwardIcon ml={2} />
+							<ArrowForwardIcon />
 						</Button>
 					</NextLink>
 				</Flex>
@@ -117,12 +118,15 @@ export default function Index({ featuredProjects, technologies }: Props) {
 			</Box>
 			<Box as="section" py="5rem">
 				<Container maxW="container.xl">
-					<UnderlineHeader label="Some of my skills" />
+					<UnderlineHeader label="Mastery" />
 					<Grid gridGap={8} mt={10} gridTemplateColumns="repeat(4, 1fr)">
 						{technologies.map(technology => (
 							<TechnologyCard key={technology.description} technology={technology} />
 						))}
 					</Grid>
+					<Text mt={4} color="gray.200">
+						...and much more
+					</Text>
 				</Container>
 			</Box>
 		</>
