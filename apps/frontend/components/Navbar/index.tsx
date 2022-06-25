@@ -6,11 +6,10 @@ import NextLink from "next/link";
 const THRESHOLD = 100;
 
 export default function Navbar() {
-	const [isAnimated, setIsAnimated] = useState(() => {
-		return typeof window !== "undefined" ? window.scrollY > THRESHOLD : false;
-	});
+	const [isAnimated, setIsAnimated] = useState(false);
 
 	useEffect(() => {
+		setIsAnimated(window.scrollY > THRESHOLD);
 		function onScroll() {
 			setIsAnimated(window.scrollY > THRESHOLD);
 		}

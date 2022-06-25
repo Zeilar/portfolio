@@ -18,11 +18,11 @@ export default function FeaturedProject({ project }: Props) {
 			<Link
 				display="flex"
 				flexDir="column"
-				boxShadow="lg"
+				boxShadow="md"
 				bgColor="gray.700"
 				rounded="lg"
 				transitionDuration="0.5s"
-				_hover={{ transform: "scale(1.05)", bgColor: "gray.600" }}
+				_hover={{ transform: "scale(1.03)", bgColor: "gray.600" }}
 			>
 				<NextImage src={project.previewImage} width="100%" height="60rem" layout="responsive" />
 				<Flex p={8} flexDir="column">
