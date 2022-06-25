@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Box, Button, Container, Flex, Text, Link, Grid } from "@chakra-ui/react";
 import avatar from "../assets/images/avatar.jpg";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { getProjects } from "../common/queries";
-import { Project } from "./projects";
+import { getProjects, getTechnologies } from "../common/queries";
+import { Project, Technology } from "./projects";
 import FeaturedProject from "../components/FeaturedProject";
 import theme from "@theme";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import UnderlineHeader from "../components/UnderlineHeader";
+import TechnologyCard from "../components/TechnologyCard";
 
 interface Props {
 	featuredProjects: Project[];
+	technologies: Technology[];
 }
 
-export default function Index({ featuredProjects }: Props) {
+export default function Index({ featuredProjects, technologies }: Props) {
 	return (
 		<>
 			<Container as="section" maxW="container.xl">
@@ -77,7 +81,7 @@ export default function Index({ featuredProjects }: Props) {
 				</Flex>
 			</Container>
 			<Container as="section" maxW="container.xl">
-				<Flex justifyContent="space-between" alignItems="center" my={10}>
+				<Flex justifyContent="space-between" alignItems="center" py="5rem">
 					<UnderlineHeader label="Featured Projects" />
 					<NextLink href="/projects" passHref>
 						<Button as={Link}>
@@ -110,22 +114,50 @@ export default function Index({ featuredProjects }: Props) {
 					</Flex>
 				</Container>
 			</Box>
+			<Box as="section" py="5rem">
+				<Container maxW="container.xl">
+					<UnderlineHeader label="Some of my skills" />
+					<Grid gridGap={8} mt={10} gridTemplateColumns="repeat(4, 1fr)">
+						{technologies.map(technology => (
+							<TechnologyCard key={technology.description} technology={technology} />
+						))}
+					</Grid>
+				</Container>
+			</Box>
 		</>
 	);
 }
 
 export async function getStaticProps() {
-	const fetcher = getProjects(true);
-	const response = await fetcher();
-	const data = await response.json();
-	const featuredProjects: Project[] = data.items.map((item: any) => ({
-		...item.fields,
-		technologies: data.includes.Entry.map((entry: any) => entry.fields),
-		previewImage: `https:${data.includes.Asset[0].fields.file.url}`,
-	}));
+	const projectsFetcher = getProjects(true);
+	const projectsResponse = await projectsFetcher();
+	const projectsData = await projectsResponse.json();
+	const featuredProjects: Project[] = projectsData.items.map((item: any) => {
+		const asset = projectsData.includes.Asset.find(
+			(asset: any) => item.fields.previewImage.sys.id === asset.sys.id
+		);
+		return {
+			...item.fields,
+			// technologies: projectsData.includes.Entry.map(({ fields }) => fields),
+			previewImage: `https:${asset.fields.file.url}`,
+		};
+	});
+
+	const technologiesFetcher = getTechnologies();
+	const technologiesResponse = await technologiesFetcher();
+	const technologiesData = await technologiesResponse.json();
+	const technologies: Technology[] = technologiesData.items.map((item: any) => {
+		const asset = technologiesData.includes.Asset.find((asset: any) => item.fields.image.sys.id === asset.sys.id);
+		return {
+			...item.fields,
+			image: `https:${asset.fields.file.url}`,
+		};
+	});
+
 	return {
 		props: {
 			featuredProjects,
+			technologies,
 		},
 	};
 }

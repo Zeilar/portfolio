@@ -1,26 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { getProjects } from "../common/queries";
-
-export interface Technology {
-	name: string;
-	color: string;
-	slug: string;
-}
-
-export interface Project {
-	title: string;
-	description: string;
-	url: string;
-	releaseDate: string;
-	previewImage: string;
-	technologies: Technology[];
-}
+import { Project } from "../types/project";
 
 interface Props {
 	projects: Project[];
 }
 
 export default function Projects({ projects }: Props) {
-	console.log(projects);
 	return <div>Projects</div>;
 }
 

@@ -34,7 +34,7 @@ export default function FeaturedProject({ project }: Props) {
 						color="gray.200"
 						lineHeight="6"
 						mt={4}
-						sx={{ "-webkit-line-clamp": "10", "-webkit-box-orient": "vertical" }}
+						sx={{ WebkitLineClamp: 8, WebkitBoxOrient: "vertical" }}
 						display="-webkit-box"
 						overflow="hidden"
 						textOverflow="ellipsis"

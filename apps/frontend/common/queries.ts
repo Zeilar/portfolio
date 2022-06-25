@@ -15,3 +15,17 @@ export function getProjects(featured = false) {
 		});
 	};
 }
+
+export function getTechnologies() {
+	return () => {
+		const params = new URLSearchParams({
+			content_type: "technology",
+			include: "1",
+		});
+		return fetch(`https://cdn.contentful.com/spaces/${SPACE_ID}/entries?${params.toString()}`, {
+			headers: {
+				Authorization: `Bearer ${ACCESS_TOKEN}`,
+			},
+		});
+	};
+}
