@@ -22,6 +22,7 @@ export default function FeaturedProject({ project }: Props) {
 				bgColor="gray.700"
 				rounded="lg"
 				transitionDuration="0.5s"
+				overflow="hidden"
 				_hover={{ transform: "scale(1.03)", bgColor: "gray.600" }}
 			>
 				<NextImage src={project.previewImage} width="100%" height="60rem" layout="responsive" />
@@ -41,7 +42,7 @@ export default function FeaturedProject({ project }: Props) {
 					>
 						{project.description}
 					</Text>
-					<Text fontSize="sm" color="gray.400" mt={4}>
+					<Text fontSize="sm" color="gray.400" mt={8}>
 						{parseDate(project.releaseDate)}
 					</Text>
 				</Flex>
