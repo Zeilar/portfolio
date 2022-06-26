@@ -22,7 +22,12 @@ export default function TechnologyCard({ technology }: Props) {
 				transitionDuration="0.5s"
 				_hover={{ transform: "scale(1.03)", bgColor: "gray.600" }}
 			>
-				<NextImage src={technology.image} width={50} height={50} />
+				<NextImage
+					style={{ filter: "drop-shadow(black 0px 1px 1px)", paddingBottom: 2, paddingTop: 2 }}
+					src={technology.image}
+					width={50}
+					height={50}
+				/>
 				<Text fontSize="3xl" mt={6}>
 					{technology.name}
 				</Text>
