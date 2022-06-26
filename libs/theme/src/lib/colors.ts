@@ -14,6 +14,5 @@ export const colors = {
 	border: gray[600],
 	text: gray[100],
 	accent: theme.colors.purple[600],
-	react: "#61dafb",
 	gray,
 };
