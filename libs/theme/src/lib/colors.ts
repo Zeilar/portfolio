@@ -7,11 +7,11 @@ const gray = {
 	500: "#414e62",
 	400: "#536279",
 	300: "#63748c",
-	200: "#78879b",
+	200: "#8c97a6",
 };
 
 export const colors = {
-	border: gray[600],
+	border: gray[500],
 	text: gray[100],
 	accent: theme.colors.purple[600],
 	gray,

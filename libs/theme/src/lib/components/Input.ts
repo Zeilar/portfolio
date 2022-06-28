@@ -1,32 +1,21 @@
 import { StyleConfig } from "@chakra-ui/theme-tools";
-import { colors } from "../colors";
 
 export const Input: StyleConfig = {
 	variants: {
-		outline: {
+		filled: {
 			field: {
+				bgColor: "gray.600",
+				borderColor: "border",
+				rounded: "base",
 				_placeholder: {
 					userSelect: "none",
 				},
-				rounded: "base",
 				_hover: {
 					borderColor: "border",
 				},
 				_focusVisible: {
-					borderColor: "blue.500",
-					bgColor: "blackAlpha.100",
-					boxShadow: `0 0 0 1px ${colors.accent}`,
-				},
-			},
-		},
-		flushed: {
-			field: {
-				_placeholder: {
-					userSelect: "none",
-				},
-				_focusVisible: {
-					borderColor: "blue.500",
-					boxShadow: `0 1px 0 0 ${colors.accent}`,
+					borderColor: "accent",
+					bgColor: "gray.600",
 				},
 			},
 		},

@@ -1,12 +1,11 @@
 export const styles = {
 	global: {
 		body: {
-			bgColor: "gray.800",
 			color: "text",
 		},
 		"#__next": {
 			minH: "100vh",
-			pt: 100,
+			pt: 200,
 		},
 		"::selection": {
 			bgColor: "purple.900",

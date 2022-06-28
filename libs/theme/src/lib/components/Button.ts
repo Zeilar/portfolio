@@ -1,4 +1,5 @@
 import { StyleConfig } from "@chakra-ui/theme-tools";
+import { colors } from "../colors";
 
 const solid = {
 	bgColor: "accent",
@@ -12,6 +13,20 @@ const solid = {
 	},
 };
 
+const secondary = {
+	...solid,
+	bgColor: "gray.600",
+	py: 7,
+	px: 8,
+	boxShadow: `0 0 0 1px inset ${colors.border}`,
+	_hover: {
+		bgColor: "gray.500",
+	},
+	_active: {
+		bgColor: "gray.700",
+	},
+};
+
 export const Button: StyleConfig = {
 	baseStyle: {
 		rounded: "base",
@@ -19,6 +34,11 @@ export const Button: StyleConfig = {
 	},
 	variants: {
 		solid,
+		primary: solid,
+		"primary-icon": {
+			...solid,
+			p: 6,
+		},
 		"primary-link": {
 			...solid,
 			"> .chakra-icon": {
@@ -36,19 +56,10 @@ export const Button: StyleConfig = {
 				},
 			},
 		},
-		secondary: {
-			...solid,
-			borderWidth: 1,
-			bgColor: "gray.600",
-			borderColor: "gray.500",
-			py: 7,
-			px: 8,
-			_hover: {
-				bgColor: "gray.500",
-			},
-			_active: {
-				bgColor: "gray.700",
-			},
+		secondary,
+		"secondary-icon": {
+			...secondary,
+			p: 6,
 		},
 	},
 };

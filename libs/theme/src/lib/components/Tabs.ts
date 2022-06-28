@@ -9,7 +9,7 @@ export const Tabs: StyleConfig = {
 				transition: "none",
 				color: "border",
 				_hover: {
-					borderColor: "gray.500",
+					borderColor: "border",
 					color: "gray.500",
 				},
 				_selected: {

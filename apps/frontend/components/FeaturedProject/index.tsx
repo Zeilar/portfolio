@@ -1,20 +1,16 @@
-import { Flex, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { Project } from "../../types/project";
 import NextImage from "next/image";
 import NextLink from "next/link";
+import { parseProjectDate } from "../../common/helpers";
 
 interface Props {
 	project: Project;
 }
 
-function parseDate(date: string) {
-	const [month, , , , year] = new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).formatToParts(new Date(date));
-	return `${month.value} ${year.value}`;
-}
-
 export default function FeaturedProject({ project }: Props) {
 	return (
-		<NextLink passHref href={`/projects/${project.title}`}>
+		<NextLink passHref href={`/projects/${project.slug}`}>
 			<Link
 				display="flex"
 				flexDir="column"
@@ -25,7 +21,14 @@ export default function FeaturedProject({ project }: Props) {
 				overflow="hidden"
 				_hover={{ transform: "scale(1.03)", bgColor: "gray.600" }}
 			>
-				<NextImage src={project.previewImage} width="100%" height="60rem" layout="responsive" />
+				<Flex h={300} overflow="hidden" justifyContent="center">
+					<NextImage
+						src={project.previewImage.url}
+						width={project.previewImage.width}
+						height={project.previewImage.height}
+						objectFit="cover"
+					/>
+				</Flex>
 				<Flex p={8} flexDir="column">
 					<Text fontSize="4xl" whiteSpace="nowrap" overflow="hidden" textOverflow="ellipsis">
 						{project.title}
@@ -43,7 +46,7 @@ export default function FeaturedProject({ project }: Props) {
 						{project.description}
 					</Text>
 					<Text fontSize="sm" color="gray.400" mt={8}>
-						{parseDate(project.releaseDate)}
+						{parseProjectDate(project.releaseDate)}
 					</Text>
 				</Flex>
 			</Link>

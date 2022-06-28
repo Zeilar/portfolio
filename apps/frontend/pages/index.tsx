@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Box, Button, Container, Flex, Text, Link, Grid } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Text, Link, Grid, Textarea, Input } from "@chakra-ui/react";
 import avatar from "../assets/images/avatar.jpg";
 import NextImage from "next/image";
 import NextLink from "next/link";
@@ -58,13 +58,13 @@ export default function Index({ featuredProjects, technologies }: Props) {
 								</>
 							}
 						/>
-						<Text color="gray.200" lineHeight="7" mt={10}>
+						<Text color="gray.200" lineHeight="7">
 							Hi, I&apos;m Philip, a web developer from Sweden.
 							<br />
 							Professional nerd who loves to build cool things.
 						</Text>
 						<NextLink passHref href="/projects">
-							<Button as={Link} mt={10} variant="primary-link">
+							<Button as={Link} mt={4} variant="primary-link">
 								Explore Projects
 								<ArrowForwardIcon />
 							</Button>
@@ -82,8 +82,8 @@ export default function Index({ featuredProjects, technologies }: Props) {
 					</Flex>
 				</Flex>
 			</Container>
-			<Container as="section" maxW="container.xl">
-				<Flex justifyContent="space-between" alignItems="center" py="5rem">
+			<Container as="section" maxW="container.xl" py="5rem">
+				<Flex justifyContent="space-between" alignItems="center">
 					<UnderlineHeader label="Featured Projects" />
 					<NextLink href="/projects" passHref>
 						<Button as={Link} variant="primary-link">
@@ -98,10 +98,10 @@ export default function Index({ featuredProjects, technologies }: Props) {
 					))}
 				</Grid>
 			</Container>
-			<Box as="section" bgColor="gray.700" py="5rem" mt="5rem">
+			<Box as="section" bgColor="gray.700" py="5rem">
 				<Container maxW="container.xl">
 					<UnderlineHeader label="About me" />
-					<Flex gap={8} mt={10}>
+					<Flex gap={8}>
 						<Flex rounded="lg" overflow="hidden">
 							<NextImage width={200} height={200} objectFit="cover" src={avatar} />
 						</Flex>
@@ -119,7 +119,7 @@ export default function Index({ featuredProjects, technologies }: Props) {
 			<Box as="section" py="5rem">
 				<Container maxW="container.xl">
 					<UnderlineHeader label="Mastery" />
-					<Grid gridGap={8} mt={10} gridTemplateColumns="repeat(4, 1fr)">
+					<Grid gridGap={8} gridTemplateColumns="repeat(4, 1fr)">
 						{technologies.map(technology => (
 							<TechnologyCard key={technology.description} technology={technology} />
 						))}
@@ -127,6 +127,13 @@ export default function Index({ featuredProjects, technologies }: Props) {
 					<Text mt={4} color="gray.200">
 						...and much more
 					</Text>
+				</Container>
+			</Box>
+			<Box as="section" py="5rem" bgColor="gray.700">
+				<Container maxW="container.xl">
+					<UnderlineHeader label="Contact" />
+					<Input variant="filled" />
+					<Textarea variant="filled" value="hello" onChange={e => e} />
 				</Container>
 			</Box>
 		</>
@@ -143,8 +150,11 @@ export async function getStaticProps() {
 		);
 		return {
 			...item.fields,
-			// technologies: projectsData.includes.Entry.map(({ fields }) => fields),
-			previewImage: `https:${asset.fields.file.url}`,
+			previewImage: {
+				url: `https:${asset.fields.file.url}`,
+				width: asset.fields.file.details.image.width,
+				height: asset.fields.file.details.image.height,
+			},
 		};
 	});
 

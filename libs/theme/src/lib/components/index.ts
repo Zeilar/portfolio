@@ -4,3 +4,4 @@ export * from "./Button";
 export * from "./Tooltip";
 export * from "./Link";
 export * from "./Container";
+export * from "./Textarea";
