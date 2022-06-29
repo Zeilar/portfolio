@@ -1,7 +1,8 @@
-import { Link, Text } from "@chakra-ui/react";
+import { AbsoluteCenter, Icon, Link, Text } from "@chakra-ui/react";
 import { Technology } from "../../types/technology";
 import NextImage from "next/image";
 import NextLink from "next/link";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 interface Props {
 	technology: Technology;
@@ -20,8 +21,13 @@ export default function TechnologyCard({ technology }: Props) {
 				bgColor="gray.700"
 				rounded="lg"
 				transitionDuration="0.5s"
-				_hover={{ transform: "scale(1.03)", bgColor: "gray.600" }}
+				pos="relative"
+				_hover={{
+					transform: "scale(1.03)",
+					bgColor: "gray.600",
+				}}
 			>
+				<Icon as={ExternalLinkIcon} fontSize="2xl" color="gray.500" pos="absolute" right={2} top={2} />
 				<NextImage
 					style={{ filter: "drop-shadow(black 0px 1px 1px)", paddingBottom: 2, paddingTop: 2 }}
 					src={technology.image}

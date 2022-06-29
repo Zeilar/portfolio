@@ -1,5 +1,4 @@
 import { StyleConfig } from "@chakra-ui/theme-tools";
-import { colors } from "../colors";
 
 const solid = {
 	bgColor: "accent",
@@ -18,7 +17,6 @@ const secondary = {
 	bgColor: "gray.600",
 	py: 7,
 	px: 8,
-	boxShadow: `0 0 0 1px inset ${colors.border}`,
 	_hover: {
 		bgColor: "gray.500",
 	},
@@ -48,6 +46,7 @@ export const Button: StyleConfig = {
 				transition: "0.25s ease",
 			},
 			_hover: {
+				...solid._hover,
 				"> .chakra-icon": {
 					ml: 2,
 					opacity: 1,

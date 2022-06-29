@@ -1,7 +1,8 @@
-import { Box, Container, ContainerProps, Flex, Link } from "@chakra-ui/react";
+import { Box, Container, ContainerProps, Flex, Icon, Link } from "@chakra-ui/react";
 import { useEffect, useMemo, useState } from "react";
 import StyledLink from "./StyledLink";
 import NextLink from "next/link";
+import { ReactComponent as BrandIcon } from "../../assets/svgs/brand.svg";
 
 const THRESHOLD = 100;
 
@@ -52,8 +53,8 @@ export default function Navbar() {
 					<Flex as="nav" gap="3.5rem" alignItems="center">
 						<Box as="li" mr="3.5rem">
 							<NextLink href="/" passHref>
-								<Link userSelect="none" fontSize="4xl" color="accent">
-									A
+								<Link display="flex" userSelect="none" fontSize="4xl" color="accent">
+									<Icon as={BrandIcon} w="1em" h="1em" />
 								</Link>
 							</NextLink>
 						</Box>

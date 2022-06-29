@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Box, Button, Container, Flex, Text, Link, Grid, Textarea, Input } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Text, Link, Grid, Textarea, Input, Icon } from "@chakra-ui/react";
 import avatar from "../assets/images/avatar.jpg";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { getProjects, getTechnologies } from "../common/queries";
 import FeaturedProject from "../components/FeaturedProject";
-import theme from "@theme";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import UnderlineHeader from "../components/UnderlineHeader";
 import TechnologyCard from "../components/TechnologyCard";
 import { Project } from "../types/project";
 import { Technology } from "../types/technology";
+import { ReactComponent as BrandIcon } from "../assets/svgs/brand.svg";
 
 interface Props {
 	featuredProjects: Project[];
@@ -23,30 +23,6 @@ export default function Index({ featuredProjects, technologies }: Props) {
 		<>
 			<Container as="section" maxW="container.xl">
 				<Flex alignItems="center" justifyContent="space-between" pos="relative" minH="50rem">
-					<Box
-						as="svg"
-						viewBox="0 0 550 600"
-						h="85%"
-						xmlns="http://www.w3.org/2000/svg"
-						pos="absolute"
-						zIndex={-1}
-						userSelect="none"
-					>
-						<g>
-							<text
-								transform="matrix(3.45637 0 0 3.45637 -581.822 -189.709)"
-								textAnchor="start"
-								fontFamily="Inter"
-								fontSize="242px"
-								y="228.74254"
-								x="161.54519"
-								fill={theme.colors.purple[900]}
-								opacity={0.2}
-							>
-								A
-							</text>
-						</g>
-					</Box>
 					<Box>
 						<UnderlineHeader
 							labelProps={{ fontSize: "6xl", lineHeight: 1.25, mb: 10 }}
@@ -70,16 +46,7 @@ export default function Index({ featuredProjects, technologies }: Props) {
 							</Button>
 						</NextLink>
 					</Box>
-					<Flex
-						display="inline-flex"
-						rounded="100%"
-						overflow="hidden"
-						borderWidth={5}
-						borderColor="accent"
-						mx="auto"
-					>
-						<NextImage src={avatar} />
-					</Flex>
+					<Icon as={BrandIcon} w="30rem" h="auto" mx="auto" />
 				</Flex>
 			</Container>
 			<Container as="section" maxW="container.xl" py="5rem">
