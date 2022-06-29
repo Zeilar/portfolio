@@ -72,7 +72,7 @@ export default function Index({ featuredProjects, technologies }: Props) {
 						<Flex rounded="lg" overflow="hidden">
 							<NextImage width={200} height={200} objectFit="cover" src={avatar} />
 						</Flex>
-						<Text color="gray.200" maxW="67%">
+						<Text color="gray.200" maxW="50%">
 							During my apprenticeship as a media designer I have developed my passion for programming.
 							Since then, about five years ago, I have been working on a multitude of different projects
 							fulltime at an agency and as a freelancer. While I focus on creating secure, performant and
