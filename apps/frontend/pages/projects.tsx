@@ -28,7 +28,7 @@ export default function Projects({ projects }: Props) {
 						bgColor="gray.700"
 						rounded="lg"
 					>
-						<Flex flexDir="column" p={8}>
+						<Flex flexDir="column" p={10}>
 							<Text fontSize="4xl">{project.title}</Text>
 							<Text fontSize="sm" color="gray.400" mb={4}>
 								{parseProjectDate(project.releaseDate)}
@@ -71,6 +71,7 @@ export default function Projects({ projects }: Props) {
 							src={project.previewImage.url}
 							width={project.previewImage.width}
 							height={project.previewImage.height}
+							objectFit="cover"
 						/>
 					</Grid>
 				))}
