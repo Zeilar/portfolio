@@ -21,6 +21,7 @@ const secondary = {
 	px: 8,
 	_hover: {
 		bgColor: "gray.500",
+		textDecor: "none",
 	},
 	_active: {
 		bgColor: "gray.700",

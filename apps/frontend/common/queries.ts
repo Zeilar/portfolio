@@ -21,8 +21,10 @@ export function getProjects(featured = false) {
 		const params = new URLSearchParams({
 			content_type: "project",
 			include: "1",
-			"fields.featured": String(featured),
 		});
+		if (featured) {
+			params.append("fields.featured", "true");
+		}
 		return fetch(`https://cdn.contentful.com/spaces/${SPACE_ID}/entries?${params.toString()}`, {
 			headers: {
 				Authorization: `Bearer ${ACCESS_TOKEN}`,
