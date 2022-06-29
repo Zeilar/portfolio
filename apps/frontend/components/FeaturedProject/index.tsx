@@ -12,6 +12,7 @@ export default function FeaturedProject({ project }: Props) {
 	return (
 		<NextLink passHref href={`/projects/${project.slug}`}>
 			<Link
+				color="text"
 				display="flex"
 				flexDir="column"
 				boxShadow="md"

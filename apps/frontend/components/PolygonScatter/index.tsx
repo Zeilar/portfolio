@@ -15,7 +15,9 @@ export default function PolygonScatter({ position }: Props) {
 		<Box
 			pos="absolute"
 			bottom={0}
+			minH={4000}
 			h="calc(100% + 200px)"
+			bgRepeat="repeat-y"
 			w={200}
 			zIndex={-1}
 			{...css}

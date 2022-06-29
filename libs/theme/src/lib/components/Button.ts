@@ -1,11 +1,13 @@
 import { StyleConfig } from "@chakra-ui/theme-tools";
 
 const solid = {
+	color: "text",
 	bgColor: "accent",
 	py: 7,
 	px: 8,
 	_hover: {
 		bgColor: "purple.500",
+		textDecor: "none",
 	},
 	_active: {
 		bgColor: "purple.700",

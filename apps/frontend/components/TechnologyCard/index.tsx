@@ -13,6 +13,7 @@ export default function TechnologyCard({ technology }: Props) {
 		<NextLink passHref href={technology.url}>
 			<Link
 				isExternal
+				color="text"
 				display="flex"
 				flexDir="column"
 				p={8}
@@ -26,7 +27,7 @@ export default function TechnologyCard({ technology }: Props) {
 					transform: "scale(1.03)",
 					bgColor: "gray.600",
 					".chakra-icon": {
-						color: "gray.400",
+						color: "blue.500",
 					},
 				}}
 			>
