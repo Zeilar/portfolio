@@ -30,7 +30,7 @@ export default function FeaturedProject({ project }: Props) {
 						objectFit="cover"
 					/>
 				</Flex>
-				<Flex p={8} flexDir="column">
+				<Flex p={10} flexDir="column">
 					<Text fontSize="4xl" whiteSpace="nowrap" overflow="hidden" textOverflow="ellipsis">
 						{project.title}
 					</Text>

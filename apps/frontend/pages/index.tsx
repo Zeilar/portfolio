@@ -50,7 +50,7 @@ export default function Index({ featuredProjects, technologies }: Props) {
 				</Flex>
 			</Container>
 			<Container as="section" maxW="container.xl" py="5rem">
-				<Flex justifyContent="space-between" alignItems="center">
+				<Flex justifyContent="space-between">
 					<UnderlineHeader label="Featured Projects" />
 					<NextLink href="/projects" passHref>
 						<Button as={Link} variant="primary-link">
