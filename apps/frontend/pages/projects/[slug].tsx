@@ -10,25 +10,23 @@ import { parseProjectDate } from "../../common/helpers";
 import NextImage from "next/image";
 import { ArrowBackIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 interface Props {
 	project: Project;
 }
 
 export default function ProjectPage({ project }: Props) {
+	const { back } = useRouter();
 	return (
 		<Container maxW="container.xl">
 			<Flex justifyContent="space-between">
 				<UnderlineHeader labelProps={{ fontSize: "6xl", lineHeight: 1.25, mb: 10 }} label={project.title} />
 				<Flex gap={2}>
-					<NextLink passHref href="/projects">
-						<Link>
-							<Button variant="secondary-icon">
-								<ArrowBackIcon mr={3} fontSize="xl" />
-								Back
-							</Button>
-						</Link>
-					</NextLink>
+					<Button variant="secondary-icon" onClick={back}>
+						<ArrowBackIcon mr={3} fontSize="xl" />
+						Back
+					</Button>
 					<NextLink passHref href={project.url}>
 						<Link isExternal>
 							<Button variant="primary-icon">
