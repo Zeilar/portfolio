@@ -1,4 +1,4 @@
-import { AbsoluteCenter, Icon, Link, Text } from "@chakra-ui/react";
+import { Icon, Link, Text } from "@chakra-ui/react";
 import { Technology } from "../../types/technology";
 import NextImage from "next/image";
 import NextLink from "next/link";

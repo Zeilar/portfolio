@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Box, Button, Container, Flex, Link, Tag, Text } from "@chakra-ui/react";
 import { getProject, getProjects } from "../../common/queries";
 import UnderlineHeader from "../../components/UnderlineHeader";
