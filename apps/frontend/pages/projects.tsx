@@ -31,7 +31,7 @@ export default function Projects({ projects }: Props) {
 						<Flex flexDir="column" p={10}>
 							<Text fontSize="4xl">{project.title}</Text>
 							<Text fontSize="sm" color="gray.400" mb={4}>
-								{parseProjectDate(project.releaseDate)}
+								Released {parseProjectDate(project.releaseDate)}
 							</Text>
 							<Flex flexWrap="wrap" gap={2} mb={8}>
 								{project.technologies.map(technology => (
