@@ -25,6 +25,9 @@ export default function TechnologyCard({ technology }: Props) {
 				_hover={{
 					transform: "scale(1.03)",
 					bgColor: "gray.600",
+					".chakra-icon": {
+						color: "gray.400",
+					},
 				}}
 			>
 				<Icon as={ExternalLinkIcon} fontSize="2xl" color="gray.500" pos="absolute" right={2} top={2} />
