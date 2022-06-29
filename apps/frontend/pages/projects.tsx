@@ -60,7 +60,7 @@ export default function Projects({ projects }: Props) {
 										</Button>
 									</Link>
 								</NextLink>
-								<NextLink passHref href={project.url}>
+								<NextLink passHref href={`/projects/${project.slug}`}>
 									<Button as={Link} variant="secondary-icon">
 										Read more
 									</Button>
