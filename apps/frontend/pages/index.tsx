@@ -73,12 +73,21 @@ export default function Index({ featuredProjects, technologies }: Props) {
 							<NextImage width={200} height={200} objectFit="cover" src={avatar} />
 						</Flex>
 						<Text color="gray.200" maxW="50%">
-							During my apprenticeship as a media designer I have developed my passion for programming.
-							Since then, about five years ago, I have been working on a multitude of different projects
-							fulltime at an agency and as a freelancer. While I focus on creating secure, performant and
-							accessible websites and apps, I believe a clear design language is as important to provide a
-							great user experience. In order to accomplish that I enjoy constantly challenging myself to
-							learn new technologies and tools.
+							My journey as a developer started in high school where I studied game development, where we
+							coded primarily in C# and the framework&nbsp;
+							<NextLink passHref href="https://www.microsoft.com/en-us/download/details.aspx?id=23714">
+								<Link isExternal>XNA</Link>
+							</NextLink>
+							. I migrated towards web development instead and after two 2-year educations which included
+							a lot of internship, I was more than ready to become a professional.
+							<br />
+							<br />
+							Most of my spare time goes towards the computer. Be it programming, gaming or watching
+							videos. You may call me a <i>supernerd</i>. Shoutout to&nbsp;
+							<NextLink passHref href="https://www.coffeestainstudios.com/">
+								<Link isExternal>Coffe Stain Studios</Link>
+							</NextLink>
+							.
 						</Text>
 					</Flex>
 				</Container>
