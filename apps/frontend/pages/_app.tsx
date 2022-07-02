@@ -1,5 +1,5 @@
 import "../fonts";
-import { Box, ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import theme from "@theme";

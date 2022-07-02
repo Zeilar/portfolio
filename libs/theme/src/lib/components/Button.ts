@@ -12,6 +12,11 @@ const solid = {
 	_active: {
 		bgColor: "purple.700",
 	},
+	_loading: {
+		_hover: {
+			bgColor: "accent",
+		},
+	},
 };
 
 const secondary = {

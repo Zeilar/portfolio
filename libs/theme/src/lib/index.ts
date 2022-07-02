@@ -1,6 +1,6 @@
-import { extendTheme, theme } from "@chakra-ui/react";
-import { colors } from "./colors";
+import { extendTheme } from "@chakra-ui/react";
 import * as components from "./components";
+import { colors } from "./colors";
 import { config } from "./config";
 import { fonts } from "./fonts";
 import { shadows } from "./shadows";
@@ -17,7 +17,27 @@ export default extendTheme(
 		colors,
 		shadows,
 		fonts,
-		components: { ...theme.components, ...components },
+		components: {
+			...components,
+			FormError: {
+				color: "blue",
+				feedbackText: {
+					color: "blue",
+				},
+				feedback: {
+					color: "blue",
+				},
+				errorText: {
+					color: "blue",
+				},
+				text: {
+					color: "blue",
+				},
+				error: {
+					color: "blue",
+				},
+			},
+		},
 		styles,
 		sizes,
 		// breakpoints,

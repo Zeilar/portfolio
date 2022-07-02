@@ -10,10 +10,15 @@ export const Textarea: StyleConfig = {
 				userSelect: "none",
 			},
 			_hover: {
+				bgColor: "gray.600",
 				borderColor: "border",
 			},
 			_focusVisible: {
+				bgColor: "gray.600",
 				borderColor: "accent",
+			},
+			_invalid: {
+				borderColor: "red.400",
 			},
 		},
 	},

@@ -19,7 +19,7 @@ interface Props {
 export default function ProjectPage({ project }: Props) {
 	const { back } = useRouter();
 	return (
-		<Container maxW="container.xl">
+		<Container maxW="container.xl" as="article">
 			<Flex justifyContent="space-between">
 				<UnderlineHeader labelProps={{ fontSize: "6xl", lineHeight: 1.25, mb: 10 }} label={project.title} />
 				<Flex gap={2}>

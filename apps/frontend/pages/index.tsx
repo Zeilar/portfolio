@@ -1,17 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Box, Button, Container, Flex, Text, Link, Grid, Textarea, Input, Icon } from "@chakra-ui/react";
+import {
+	Box,
+	Button,
+	Container,
+	Flex,
+	Text,
+	Link,
+	Grid,
+	Textarea,
+	Input,
+	Icon,
+	FormHelperText,
+	FormLabel,
+	FormControl,
+} from "@chakra-ui/react";
 import avatar from "../assets/images/avatar.jpg";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { getProjects, getTechnologies } from "../common/queries";
 import FeaturedProject from "../components/FeaturedProject";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, EmailIcon } from "@chakra-ui/icons";
 import UnderlineHeader from "../components/UnderlineHeader";
 import TechnologyCard from "../components/TechnologyCard";
 import { Project } from "../types/project";
 import { Technology } from "../types/technology";
 import { ReactComponent as BrandIcon } from "../assets/svgs/brand.svg";
+import { GetStaticPropsResult } from "next";
+import Contact from "../components/Contact";
 
 interface Props {
 	featuredProjects: Project[];
@@ -105,18 +121,12 @@ export default function Index({ featuredProjects, technologies }: Props) {
 					</Text>
 				</Container>
 			</Box>
-			<Box as="section" py="5rem" bgColor="gray.700">
-				<Container maxW="container.xl">
-					<UnderlineHeader label="Contact" />
-					<Input variant="filled" />
-					<Textarea variant="filled" value="hello" onChange={e => e} />
-				</Container>
-			</Box>
+			<Contact />
 		</>
 	);
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
 	const projectsFetcher = getProjects(true);
 	const projectsResponse = await projectsFetcher();
 	const projectsData = await projectsResponse.json();

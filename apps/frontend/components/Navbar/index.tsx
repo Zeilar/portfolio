@@ -64,9 +64,6 @@ export default function Navbar() {
 						<li>
 							<StyledLink href="/projects">Projects</StyledLink>
 						</li>
-						<li>
-							<StyledLink href="/contact">Contact</StyledLink>
-						</li>
 					</Flex>
 				</Flex>
 			</Container>

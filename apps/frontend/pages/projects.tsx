@@ -2,6 +2,7 @@
 
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Button, Container, Flex, Grid, Link, Tag, Text } from "@chakra-ui/react";
+import { GetStaticPropsResult } from "next";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { parseProjectDate } from "../common/helpers";
@@ -21,6 +22,7 @@ export default function Projects({ projects }: Props) {
 				{projects.map(project => (
 					<Grid
 						key={project.url}
+						as="article"
 						gridTemplateColumns="1fr 1fr"
 						overflow="hidden"
 						color="text"
@@ -80,7 +82,7 @@ export default function Projects({ projects }: Props) {
 	);
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
 	const fetcher = getProjects();
 	const response = await fetcher();
 	const data = await response.json();

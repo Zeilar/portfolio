@@ -12,6 +12,10 @@ export const Input: StyleConfig = {
 				},
 				_hover: {
 					borderColor: "border",
+					bgColor: "gray.600",
+				},
+				_invalid: {
+					borderColor: "red.400",
 				},
 				_focusVisible: {
 					borderColor: "accent",
