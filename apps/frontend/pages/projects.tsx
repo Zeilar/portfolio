@@ -143,8 +143,9 @@ export default function Projects({ projects }: Props) {
 					aria-label="Toggle reader"
 					pos="fixed"
 					boxShadow="md"
-					bottom={8}
-					right={8}
+					transform="translateY(-50%)"
+					top="50%"
+					right={4}
 					size="lg"
 					onClick={() => setIsReaderMode(p => !p)}
 					zIndex={10}
