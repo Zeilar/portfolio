@@ -3,6 +3,7 @@
 import { CloseIcon, ExternalLinkIcon, SearchIcon } from "@chakra-ui/icons";
 import { Box, Button, Container, Flex, Grid, IconButton, Link, Tag, Text, Tooltip, useTheme } from "@chakra-ui/react";
 import { GetStaticPropsResult } from "next";
+import Head from "next/head";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -32,11 +33,31 @@ export default function Projects({ projects }: Props) {
 
 	useEffect(() => {
 		function onKeyDown(e: KeyboardEvent) {
-			if (!isReaderMode || !e.key.startsWith("Arrow")) {
+			switch (e.key) {
+				case "r":
+					setIsReaderMode(p => !p);
+					break;
+				case "Escape":
+					setIsReaderMode(false);
+					break;
+			}
+		}
+		document.addEventListener("keydown", onKeyDown);
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+		};
+	}, []);
+
+	useEffect(() => {
+		function onKeyDown(e: KeyboardEvent) {
+			if (!isReaderMode) {
 				return;
 			}
 			e.preventDefault();
 			switch (e.key) {
+				case "Escape":
+					setIsReaderMode(false);
+					break;
 				case "ArrowLeft":
 				case "ArrowUp":
 					readerUp();
@@ -64,7 +85,10 @@ export default function Projects({ projects }: Props) {
 	}, [readerIndex]);
 
 	return (
-		<Container maxW="container.xl">
+		<Container maxW="container.xl" mb="5rem">
+			<Head>
+				<title>Angelin | Projects</title>
+			</Head>
 			<UnderlineHeader label="Projects" />
 			<Flex flexDir="column" gap={10} ref={articlesRef}>
 				{isReaderMode && (
@@ -109,7 +133,17 @@ export default function Projects({ projects }: Props) {
 									</Tag>
 								))}
 							</Flex>
-							<Text color="gray.200" mb={10}>
+							<Text
+								fontSize="sm"
+								color="gray.200"
+								lineHeight="6"
+								mt={4}
+								sx={{ WebkitLineClamp: 8, WebkitBoxOrient: "vertical" }}
+								display="-webkit-box"
+								overflow="hidden"
+								textOverflow="ellipsis"
+								mb={10}
+							>
 								{project.description}
 							</Text>
 							<Flex mt="auto" gap={2}>
@@ -137,10 +171,11 @@ export default function Projects({ projects }: Props) {
 					</Grid>
 				))}
 			</Flex>
-			<Tooltip label="Toggle reader" closeOnClick={false} placement="left">
+			<Tooltip label={isReaderMode ? "Close reader" : "Open reader"} closeOnClick={false} placement="left">
 				<IconButton
 					display={{ base: "none", desktop: "inline-flex" }}
 					aria-label="Toggle reader"
+					variant={isReaderMode ? "secondary" : "primary"}
 					pos="fixed"
 					boxShadow="md"
 					transform="translateY(-50%)"

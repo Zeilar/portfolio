@@ -11,6 +11,7 @@ import NextImage from "next/image";
 import { ArrowBackIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 interface Props {
 	project: Project;
@@ -19,16 +20,19 @@ interface Props {
 export default function ProjectPage({ project }: Props) {
 	const { back } = useRouter();
 	return (
-		<Container maxW="container.xl" as="article">
+		<Container maxW="container.xl" as="article" mb="5rem">
+			<Head>
+				<title>{`Angelin | ${project.title}`}</title>
+			</Head>
 			<Flex justifyContent="space-between">
 				<UnderlineHeader labelProps={{ fontSize: "6xl", lineHeight: 1.25, mb: 10 }} label={project.title} />
-				<Flex gap={2}>
+				<Flex gap={2} alignItems="flex-start">
 					<Button variant="secondary-icon" onClick={back}>
 						<ArrowBackIcon mr={3} fontSize="xl" />
 						Back
 					</Button>
 					<NextLink passHref href={project.url}>
-						<Link isExternal>
+						<Link isExternal _hover={{ textDecor: "none" }}>
 							<Button variant="primary-icon">
 								<ExternalLinkIcon mr={3} fontSize="xl" />
 								View app
@@ -40,7 +44,7 @@ export default function ProjectPage({ project }: Props) {
 			<Text mb={4} color="gray.400">
 				Released {parseProjectDate(project.releaseDate)}
 			</Text>
-			<Box maxW="50%">
+			<Box maxW="75%">
 				<Flex flexWrap="wrap" gap={2} mb={8}>
 					{project.technologies.map(technology => (
 						<Tag

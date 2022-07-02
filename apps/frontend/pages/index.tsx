@@ -14,6 +14,7 @@ import { Technology } from "../types/technology";
 import { ReactComponent as BrandIcon } from "../assets/svgs/brand.svg";
 import { GetStaticPropsResult } from "next";
 import Contact from "../components/Contact";
+import Head from "next/head";
 
 interface Props {
 	featuredProjects: Project[];
@@ -24,6 +25,9 @@ export default function Index({ featuredProjects, technologies }: Props) {
 	return (
 		<>
 			<Container as="section" maxW="container.xl">
+				<Head>
+					<title>Angelin</title>
+				</Head>
 				<Flex alignItems="center" justifyContent="space-between" minH="50rem">
 					<Box>
 						<UnderlineHeader
