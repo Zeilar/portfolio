@@ -78,10 +78,8 @@ export default function Projects({ projects }: Props) {
 		if (!articlesRef.current) {
 			return;
 		}
-		const article = articlesRef.current.querySelectorAll("article")[readerIndex];
-		const { top, height } = article.getBoundingClientRect();
-		window.scrollTo({ top: top + height / 2, behavior: "smooth" });
-		article.focus();
+		const { offsetTop, offsetHeight } = articlesRef.current.querySelectorAll("article")[readerIndex];
+		window.scrollTo({ top: offsetTop - offsetHeight / 2, behavior: "smooth" });
 	}, [readerIndex]);
 
 	return (
@@ -98,7 +96,7 @@ export default function Projects({ projects }: Props) {
 						w="100%"
 						h="100%"
 						boxShadow={`0 0 0 100vmax inset ${theme.colors.blackAlpha[600]}`}
-						zIndex={1}
+						zIndex={100}
 					/>
 				)}
 				{projects.map((project, i) => (
@@ -111,7 +109,7 @@ export default function Projects({ projects }: Props) {
 						boxShadow="md"
 						bgColor="gray.700"
 						rounded="lg"
-						zIndex={isReaderMode && i === readerIndex ? 5 : undefined}
+						zIndex={isReaderMode && i === readerIndex ? 110 : undefined}
 					>
 						<Flex flexDir="column" p={10}>
 							<Text fontSize="4xl">{project.title}</Text>

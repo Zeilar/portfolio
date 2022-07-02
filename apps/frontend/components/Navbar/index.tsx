@@ -28,7 +28,7 @@ export default function Navbar() {
 	return (
 		<Box
 			as="header"
-			zIndex={100}
+			zIndex={50}
 			pos="fixed"
 			transition="0.5s ease"
 			top={0}
