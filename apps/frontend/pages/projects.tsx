@@ -96,7 +96,7 @@ export default function Projects({ projects }: Props) {
 						w="100%"
 						h="100%"
 						boxShadow={`0 0 0 100vmax inset ${theme.colors.blackAlpha[600]}`}
-						zIndex={100}
+						zIndex={1}
 					/>
 				)}
 				{projects.map((project, i) => (
@@ -109,7 +109,7 @@ export default function Projects({ projects }: Props) {
 						boxShadow="md"
 						bgColor="gray.700"
 						rounded="lg"
-						zIndex={isReaderMode && i === readerIndex ? 110 : undefined}
+						zIndex={isReaderMode && i === readerIndex ? 5 : undefined}
 					>
 						<Flex flexDir="column" p={10}>
 							<Text fontSize="4xl">{project.title}</Text>
