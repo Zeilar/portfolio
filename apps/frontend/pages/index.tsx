@@ -24,7 +24,7 @@ export default function Index({ featuredProjects, technologies }: Props) {
 	return (
 		<>
 			<Container as="section" maxW="container.xl">
-				<Flex alignItems="center" justifyContent="space-between" pos="relative" minH="50rem">
+				<Flex alignItems="center" justifyContent="space-between" minH="50rem">
 					<Box>
 						<UnderlineHeader
 							labelProps={{ fontSize: "6xl", lineHeight: 1.25, mb: 10 }}
