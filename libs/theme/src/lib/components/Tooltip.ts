@@ -5,5 +5,6 @@ export const Tooltip: StyleConfig = {
 		bgColor: "gray.900",
 		rounded: "md",
 		boxShadow: "md",
+		color: "text",
 	},
 };

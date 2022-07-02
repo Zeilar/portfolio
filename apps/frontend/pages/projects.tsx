@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Button, Container, Flex, Grid, Link, Tag, Text } from "@chakra-ui/react";
+import { CloseIcon, ExternalLinkIcon, SearchIcon } from "@chakra-ui/icons";
+import { Box, Button, Container, Flex, Grid, IconButton, Link, Tag, Text, Tooltip, useTheme } from "@chakra-ui/react";
 import { GetStaticPropsResult } from "next";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { parseProjectDate } from "../common/helpers";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { clamp, parseProjectDate } from "../common/helpers";
 import { getProjects } from "../common/queries";
 import UnderlineHeader from "../components/UnderlineHeader";
 import { Project } from "../types/project";
@@ -15,11 +16,68 @@ interface Props {
 }
 
 export default function Projects({ projects }: Props) {
+	const [isReaderMode, setIsReaderMode] = useState(false);
+	const [readerIndex, setReaderIndex] = useState(0);
+
+	const articlesRef = useRef<HTMLDivElement>(null);
+	const theme = useTheme();
+
+	const readerUp = useCallback(() => {
+		setReaderIndex(p => clamp(p - 1, 0, projects.length - 1));
+	}, [projects.length]);
+
+	const readerDown = useCallback(() => {
+		setReaderIndex(p => clamp(p + 1, 0, projects.length - 1));
+	}, [projects.length]);
+
+	useEffect(() => {
+		function onKeyDown(e: KeyboardEvent) {
+			if (!isReaderMode || !e.key.startsWith("Arrow")) {
+				return;
+			}
+			e.preventDefault();
+			switch (e.key) {
+				case "ArrowLeft":
+				case "ArrowUp":
+					readerUp();
+					break;
+				case "ArrowRight":
+				case "ArrowDown":
+					readerDown();
+					break;
+			}
+		}
+		document.addEventListener("keydown", onKeyDown);
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+		};
+	}, [isReaderMode, projects.length, readerUp, readerDown]);
+
+	useEffect(() => {
+		if (!articlesRef.current) {
+			return;
+		}
+		const article = articlesRef.current.querySelectorAll("article")[readerIndex];
+		const { top, height } = article.getBoundingClientRect();
+		window.scrollTo({ top: top + height / 2, behavior: "smooth" });
+		article.focus();
+	}, [readerIndex]);
+
 	return (
 		<Container maxW="container.xl">
 			<UnderlineHeader label="Projects" />
-			<Flex flexDir="column" gap={10}>
-				{projects.map(project => (
+			<Flex flexDir="column" gap={10} ref={articlesRef}>
+				{isReaderMode && (
+					<Box
+						pos="fixed"
+						inset={0}
+						w="100%"
+						h="100%"
+						boxShadow={`0 0 0 100vmax inset ${theme.colors.blackAlpha[600]}`}
+						zIndex={1}
+					/>
+				)}
+				{projects.map((project, i) => (
 					<Grid
 						key={project.url}
 						as="article"
@@ -29,6 +87,7 @@ export default function Projects({ projects }: Props) {
 						boxShadow="md"
 						bgColor="gray.700"
 						rounded="lg"
+						zIndex={isReaderMode && i === readerIndex ? 5 : undefined}
 					>
 						<Flex flexDir="column" p={10}>
 							<Text fontSize="4xl">{project.title}</Text>
@@ -78,6 +137,22 @@ export default function Projects({ projects }: Props) {
 					</Grid>
 				))}
 			</Flex>
+			<Tooltip label="Toggle reader" closeOnClick={false} placement="left">
+				<IconButton
+					display={{ base: "none", desktop: "inline-flex" }}
+					aria-label="Toggle reader"
+					pos="fixed"
+					boxShadow="md"
+					bottom={8}
+					right={8}
+					size="lg"
+					onClick={() => setIsReaderMode(p => !p)}
+					zIndex={10}
+					_focusVisible={{ outline: 0 }}
+				>
+					{isReaderMode ? <CloseIcon /> : <SearchIcon />}
+				</IconButton>
+			</Tooltip>
 		</Container>
 	);
 }

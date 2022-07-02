@@ -7,11 +7,11 @@ import { shadows } from "./shadows";
 import { styles } from "./styles";
 import { sizes } from "./sizes";
 // import { withDefaults } from "./withDefaults";
-// import { breakpoints } from "./breakpoints";
+import { breakpoints } from "./breakpoints";
 // import { textStyles } from "./textStyles";
 // import { radii } from "./radii";
 
-export default extendTheme(
+const theme = extendTheme(
 	{
 		config,
 		colors,
@@ -40,10 +40,12 @@ export default extendTheme(
 		},
 		styles,
 		sizes,
-		// breakpoints,
+		breakpoints,
 		// textStyles,
 		// radii,
 	}
 	// textStyles,
 	// ...withDefaults
 );
+
+export default theme;
