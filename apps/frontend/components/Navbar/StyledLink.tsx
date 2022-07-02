@@ -31,6 +31,7 @@ export default function StyledLink({ href, ...props }: Props) {
 				}}
 				_activeLink={{ color: "text", _after: { w: "100%" } }}
 				_hover={{ color: "text", _after: { w: "100%", transition: "0.25s" } }}
+				_focusVisible={{ outline: 0 }}
 				{...props}
 			/>
 		</NextLink>
