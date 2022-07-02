@@ -1,26 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {
-	Box,
-	Button,
-	Container,
-	Flex,
-	Text,
-	Link,
-	Grid,
-	Textarea,
-	Input,
-	Icon,
-	FormHelperText,
-	FormLabel,
-	FormControl,
-} from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Text, Link, Grid, Icon } from "@chakra-ui/react";
 import avatar from "../assets/images/avatar.jpg";
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { getProjects, getTechnologies } from "../common/queries";
 import FeaturedProject from "../components/FeaturedProject";
-import { ArrowForwardIcon, EmailIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import UnderlineHeader from "../components/UnderlineHeader";
 import TechnologyCard from "../components/TechnologyCard";
 import { Project } from "../types/project";

@@ -8,8 +8,8 @@ export const styles = {
 			pt: 200,
 		},
 		"::selection": {
-			bgColor: "purple.900",
-			color: "text",
+			bgColor: "blackAlpha.700",
+			color: "accent",
 		},
 		"*, *::before, *::after": {
 			borderColor: "border",
