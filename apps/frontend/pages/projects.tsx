@@ -67,7 +67,7 @@ export default function Projects({ projects }: Props) {
 							>
 								{project.description}
 							</Text>
-							<Flex mt="auto" gap={2}>
+							<Flex mt="auto" gap={2} alignItems="center">
 								<NextLink passHref href={project.url}>
 									<Link isExternal _hover={{ textDecor: "none" }}>
 										<Button variant="primary-icon">
@@ -77,9 +77,9 @@ export default function Projects({ projects }: Props) {
 									</Link>
 								</NextLink>
 								<NextLink passHref href={`/projects/${project.slug}`}>
-									<Button as={Link} variant="secondary-icon">
+									<Link paddingInline={4} color="text">
 										Read more
-									</Button>
+									</Link>
 								</NextLink>
 							</Flex>
 						</Flex>
