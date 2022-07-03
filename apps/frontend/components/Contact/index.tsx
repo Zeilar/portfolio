@@ -8,6 +8,7 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Input,
+	Text,
 	Textarea,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
@@ -19,12 +20,17 @@ interface Fields {
 	message: string;
 }
 
+const MAX_MESSAGE_LENGTH = 500;
+
 export default function Contact() {
-	const { handleSubmit, register, formState } = useForm<Fields>();
+	const { handleSubmit, register, formState, watch } = useForm<Fields>({
+		defaultValues: { message: "", email: "", name: "" },
+	});
 
 	function onSubmit(fields: Fields) {
 		return fetch("/api/v1/contact-submit", { method: "POST", body: JSON.stringify(fields) });
 	}
+	const messageLength = watch("message").length;
 
 	return (
 		<Box as="section" py="5rem" bgColor="gray.700" onSubmit={handleSubmit(onSubmit)}>
@@ -90,12 +96,21 @@ export default function Contact() {
 								value: true,
 							},
 							maxLength: {
-								message: "Max length is 500 characters.",
-								value: 500,
+								message: `Max length is ${MAX_MESSAGE_LENGTH} characters.`,
+								value: MAX_MESSAGE_LENGTH,
 							},
 						})}
 					/>
-					<FormErrorMessage color="red.400">{formState.errors.message?.message}</FormErrorMessage>
+					<Flex alignItems="center">
+						<FormErrorMessage color="red.400">{formState.errors.message?.message}</FormErrorMessage>
+						<Text
+							fontSize="sm"
+							color={messageLength >= MAX_MESSAGE_LENGTH ? "red.400" : "gray.200"}
+							ml="auto"
+						>
+							{messageLength} / {MAX_MESSAGE_LENGTH}
+						</Text>
+					</Flex>
 				</FormControl>
 				<Button type="submit" variant="primary-icon" mt={8} isLoading={formState.isSubmitting}>
 					<EmailIcon mr={3} fontSize="xl" />

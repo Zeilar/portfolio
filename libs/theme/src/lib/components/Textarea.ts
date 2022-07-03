@@ -19,6 +19,9 @@ export const Textarea: StyleConfig = {
 			},
 			_invalid: {
 				borderColor: "red.400",
+				_focusVisible: {
+					borderColor: "red.400",
+				},
 			},
 		},
 	},

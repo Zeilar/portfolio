@@ -14,12 +14,15 @@ export const Input: StyleConfig = {
 					borderColor: "border",
 					bgColor: "gray.600",
 				},
-				_invalid: {
-					borderColor: "red.400",
-				},
 				_focusVisible: {
 					borderColor: "accent",
 					bgColor: "gray.600",
+				},
+				_invalid: {
+					borderColor: "red.400",
+					_focusVisible: {
+						borderColor: "red.400",
+					},
 				},
 			},
 		},
