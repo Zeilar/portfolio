@@ -10,7 +10,7 @@ export default function SocialLink({ icon, href }: Props) {
 	return (
 		<NextLink passHref href={href}>
 			<Link isExternal display="flex">
-				<Icon as={icon} fill="accent" _hover={{ fill: "purple.400" }} />
+				<Icon as={icon} fill="accent" _hover={{ fill: "purple.500" }} />
 			</Link>
 		</NextLink>
 	);
