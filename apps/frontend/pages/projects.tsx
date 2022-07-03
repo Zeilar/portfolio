@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { CloseIcon, ExternalLinkIcon, SearchIcon } from "@chakra-ui/icons";
-import { Box, Button, Container, Flex, Grid, IconButton, Link, Tag, Text, Tooltip, useTheme } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { Button, Container, Flex, Grid, Link, Tag, Text } from "@chakra-ui/react";
 import { GetStaticPropsResult } from "next";
 import Head from "next/head";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { clamp, parseProjectDate } from "../common/helpers";
+import { parseProjectDate } from "../common/helpers";
 import { getProjects } from "../common/queries";
 import UnderlineHeader from "../components/UnderlineHeader";
 import { Project } from "../types/project";
@@ -17,88 +16,13 @@ interface Props {
 }
 
 export default function Projects({ projects }: Props) {
-	const [isReaderMode, setIsReaderMode] = useState(false);
-	const [readerIndex, setReaderIndex] = useState(0);
-
-	const articlesRef = useRef<HTMLDivElement>(null);
-	const theme = useTheme();
-
-	const readerUp = useCallback(() => {
-		setReaderIndex(p => clamp(p - 1, 0, projects.length - 1));
-	}, [projects.length]);
-
-	const readerDown = useCallback(() => {
-		setReaderIndex(p => clamp(p + 1, 0, projects.length - 1));
-	}, [projects.length]);
-
-	useEffect(() => {
-		function onKeyDown(e: KeyboardEvent) {
-			switch (e.key) {
-				case "r":
-					setIsReaderMode(p => !p);
-					break;
-				case "Escape":
-					setIsReaderMode(false);
-					break;
-			}
-		}
-		document.addEventListener("keydown", onKeyDown);
-		return () => {
-			document.removeEventListener("keydown", onKeyDown);
-		};
-	}, []);
-
-	useEffect(() => {
-		function onKeyDown(e: KeyboardEvent) {
-			if (!isReaderMode) {
-				return;
-			}
-			e.preventDefault();
-			switch (e.key) {
-				case "Escape":
-					setIsReaderMode(false);
-					break;
-				case "ArrowLeft":
-				case "ArrowUp":
-					readerUp();
-					break;
-				case "ArrowRight":
-				case "ArrowDown":
-					readerDown();
-					break;
-			}
-		}
-		document.addEventListener("keydown", onKeyDown);
-		return () => {
-			document.removeEventListener("keydown", onKeyDown);
-		};
-	}, [isReaderMode, projects.length, readerUp, readerDown]);
-
-	useEffect(() => {
-		if (!articlesRef.current) {
-			return;
-		}
-		const { offsetTop, offsetHeight } = articlesRef.current.querySelectorAll("article")[readerIndex];
-		window.scrollTo({ top: offsetTop - offsetHeight / 2, behavior: "smooth" });
-	}, [readerIndex]);
-
 	return (
 		<Container maxW="container.xl" mb="5rem">
 			<Head>
 				<title>Angelin | Projects</title>
 			</Head>
 			<UnderlineHeader label="Projects" />
-			<Flex flexDir="column" gap={10} ref={articlesRef}>
-				{isReaderMode && (
-					<Box
-						pos="fixed"
-						inset={0}
-						w="100%"
-						h="100%"
-						boxShadow={`0 0 0 100vmax inset ${theme.colors.blackAlpha[600]}`}
-						zIndex={1}
-					/>
-				)}
+			<Flex flexDir="column" gap={10}>
 				{projects.map((project, i) => (
 					<Grid
 						key={project.url}
@@ -109,7 +33,6 @@ export default function Projects({ projects }: Props) {
 						boxShadow="md"
 						bgColor="gray.700"
 						rounded="lg"
-						zIndex={isReaderMode && i === readerIndex ? 5 : undefined}
 					>
 						<Flex flexDir="column" p={10}>
 							<Text fontSize="4xl">{project.title}</Text>
@@ -169,24 +92,6 @@ export default function Projects({ projects }: Props) {
 					</Grid>
 				))}
 			</Flex>
-			<Tooltip label={isReaderMode ? "Close reader" : "Open reader"} closeOnClick={false} placement="left">
-				<IconButton
-					display={{ base: "none", desktop: "inline-flex" }}
-					aria-label="Toggle reader"
-					variant={isReaderMode ? "secondary" : "primary"}
-					pos="fixed"
-					boxShadow="md"
-					transform="translateY(-50%)"
-					top="50%"
-					right={4}
-					size="lg"
-					onClick={() => setIsReaderMode(p => !p)}
-					zIndex={10}
-					_focusVisible={{ outline: 0 }}
-				>
-					{isReaderMode ? <CloseIcon /> : <SearchIcon />}
-				</IconButton>
-			</Tooltip>
 		</Container>
 	);
 }
