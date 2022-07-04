@@ -10,6 +10,7 @@ import {
 	Input,
 	Text,
 	Textarea,
+	useToast,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import UnderlineHeader from "../UnderlineHeader";
@@ -23,20 +24,36 @@ interface Fields {
 const MAX_MESSAGE_LENGTH = 500;
 
 export default function Contact() {
-	const { handleSubmit, register, formState, watch } = useForm<Fields>({
+	const { handleSubmit, register, formState, watch, reset } = useForm<Fields>({
 		defaultValues: { message: "", email: "", name: "" },
 	});
+	const toast = useToast();
 
-	function onSubmit(fields: Fields) {
-		return fetch("/api/v1/contact-submit", { method: "POST", body: JSON.stringify(fields) });
+	async function onSubmit(fields: Fields) {
+		const { ok } = await fetch("/api/v1/contact-submit", { method: "POST", body: JSON.stringify(fields) });
+		if (ok) {
+			toast({
+				position: "top",
+				status: "success",
+				title: "Email sent",
+				description: "Thank you for contacting me, I will reply as soon as I can!",
+			});
+			reset();
+		} else {
+			toast({
+				position: "top",
+				status: "error",
+				title: "Error sending mail",
+			});
+		}
 	}
 	const messageLength = watch("message").length;
 
 	return (
-		<Box as="section" py="5rem" bgColor="gray.700" onSubmit={handleSubmit(onSubmit)}>
+		<Box as="section" py={[6, "5rem"]} bgColor="gray.700" onSubmit={handleSubmit(onSubmit)}>
 			<Container maxW="container.xl" as="form">
 				<UnderlineHeader label="Contact" />
-				<Flex gap={20}>
+				<Flex gap={[4, 20]} flexDir={["column", "row"]}>
 					<FormControl isInvalid={Boolean(formState.errors.name)}>
 						<FormLabel htmlFor="name">Name</FormLabel>
 						<Input
@@ -56,7 +73,9 @@ export default function Contact() {
 								},
 							})}
 						/>
-						<FormErrorMessage color="red.400">{formState.errors.name?.message}</FormErrorMessage>
+						<FormErrorMessage mb={2} color="red.400">
+							{formState.errors.name?.message}
+						</FormErrorMessage>
 					</FormControl>
 					<FormControl isInvalid={Boolean(formState.errors.email)}>
 						<FormLabel htmlFor="email">Email address</FormLabel>
@@ -78,10 +97,12 @@ export default function Contact() {
 								},
 							})}
 						/>
-						<FormErrorMessage color="red.400">{formState.errors.email?.message}</FormErrorMessage>
+						<FormErrorMessage mb={2} color="red.400">
+							{formState.errors.email?.message}
+						</FormErrorMessage>
 					</FormControl>
 				</Flex>
-				<FormControl mt={8} isInvalid={Boolean(formState.errors.message)}>
+				<FormControl mt={[4, 8]} isInvalid={Boolean(formState.errors.message)}>
 					<FormLabel htmlFor="message">Message</FormLabel>
 					<Textarea
 						rows={10}
@@ -102,7 +123,9 @@ export default function Contact() {
 						})}
 					/>
 					<Flex alignItems="center">
-						<FormErrorMessage color="red.400">{formState.errors.message?.message}</FormErrorMessage>
+						<FormErrorMessage mb={2} color="red.400">
+							{formState.errors.message?.message}
+						</FormErrorMessage>
 						<Text
 							fontSize="sm"
 							color={messageLength >= MAX_MESSAGE_LENGTH ? "red.400" : "gray.200"}
@@ -112,7 +135,7 @@ export default function Contact() {
 						</Text>
 					</Flex>
 				</FormControl>
-				<Button type="submit" variant="primary-icon" mt={8} isLoading={formState.isSubmitting}>
+				<Button type="submit" variant="primary-icon" mt={[0, 8]} isLoading={formState.isSubmitting}>
 					<EmailIcon mr={3} fontSize="xl" />
 					Send
 				</Button>

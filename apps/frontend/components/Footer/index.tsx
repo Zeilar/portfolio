@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
 export default function Footer() {
 	return (
 		<Flex as="footer" bgColor="gray.900">
-			<Container maxW="container.xl" py="5rem">
+			<Container maxW="container.xl" py={[6, "5rem"]}>
 				<Flex alignItems="center" justifyContent="space-between" mb={8}>
 					<Flex alignItems="center">
 						<Icon as={BrandIcon} fontSize="5xl" mr={4} />

@@ -8,13 +8,13 @@ import { getProjects, getTechnologies } from "../common/queries";
 import FeaturedProject from "../components/FeaturedProject";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import UnderlineHeader from "../components/UnderlineHeader";
-import TechnologyCard from "../components/TechnologyCard";
 import { Project } from "../types/project";
 import { Technology } from "../types/technology";
 import { ReactComponent as BrandIcon } from "../assets/svgs/brand.svg";
 import { GetStaticPropsResult } from "next";
 import Contact from "../components/Contact";
 import Head from "next/head";
+import Mastery from "../components/Mastery";
 
 interface Props {
 	featuredProjects: Project[];
@@ -28,10 +28,10 @@ export default function Index({ featuredProjects, technologies }: Props) {
 				<Head>
 					<title>Angelin</title>
 				</Head>
-				<Flex alignItems="center" justifyContent="space-between" minH="50rem">
+				<Flex alignItems="center" justifyContent="space-between" minH={[null, "50rem"]}>
 					<Box>
 						<UnderlineHeader
-							labelProps={{ fontSize: "6xl", lineHeight: 1.25, mb: 10 }}
+							labelProps={{ fontSize: ["4xl", "6xl"], lineHeight: 1.25, mb: [5, 10] }}
 							label={
 								<>
 									Idea in,
@@ -52,14 +52,14 @@ export default function Index({ featuredProjects, technologies }: Props) {
 							</Button>
 						</NextLink>
 					</Box>
-					<Icon as={BrandIcon} w="30rem" h="auto" mx="auto" />
+					<Icon display={["none", "block"]} as={BrandIcon} w="30rem" h="auto" mx="auto" />
 				</Flex>
 			</Container>
-			<Container as="section" maxW="container.xl" py="5rem">
+			<Container as="section" maxW="container.xl" py={[6, "5rem"]}>
 				<Flex justifyContent="space-between">
 					<UnderlineHeader label="Featured Projects" />
 					<NextLink href="/projects" passHref>
-						<Button as={Link} variant="primary-link">
+						<Button display={["none", "flex"]} as={Link} variant="primary-link">
 							All Projects
 							<ArrowForwardIcon />
 						</Button>
@@ -71,14 +71,14 @@ export default function Index({ featuredProjects, technologies }: Props) {
 					))}
 				</Grid>
 			</Container>
-			<Box as="section" bgColor="gray.700" py="5rem">
+			<Box as="section" bgColor="gray.700" py={[6, "5rem"]}>
 				<Container maxW="container.xl">
 					<UnderlineHeader label="About me" />
-					<Flex gap={8}>
+					<Flex gap={[4, 8]} flexDir={["column", "row"]}>
 						<Flex rounded="lg" overflow="hidden">
 							<NextImage width={200} height={200} objectFit="cover" src={avatar} />
 						</Flex>
-						<Text color="gray.200" maxW="50%">
+						<Text color="gray.200" maxW={["auto", "50%"]}>
 							My journey as a developer started in high school where I studied game development, where we
 							coded primarily in C# and the framework&nbsp;
 							<NextLink passHref href="https://www.microsoft.com/en-us/download/details.aspx?id=23714">
@@ -98,19 +98,7 @@ export default function Index({ featuredProjects, technologies }: Props) {
 					</Flex>
 				</Container>
 			</Box>
-			<Box as="section" py="5rem">
-				<Container maxW="container.xl">
-					<UnderlineHeader label="Mastery" />
-					<Grid gridGap={8} gridTemplateColumns="repeat(4, 1fr)">
-						{technologies.map(technology => (
-							<TechnologyCard key={technology.description} technology={technology} />
-						))}
-					</Grid>
-					<Text mt={4} color="gray.200">
-						...and much more
-					</Text>
-				</Container>
-			</Box>
+			<Mastery technologies={technologies} />
 			<Contact />
 		</>
 	);

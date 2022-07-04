@@ -1,13 +1,13 @@
-import { Box, Container, ContainerProps, Flex, Icon, Link } from "@chakra-ui/react";
+import { Box, Container, ContainerProps, Flex, Icon, Link, useBreakpoint } from "@chakra-ui/react";
 import { useEffect, useMemo, useState } from "react";
 import StyledLink from "./StyledLink";
 import NextLink from "next/link";
 import { ReactComponent as BrandIcon } from "../../assets/svgs/brand.svg";
 
-const THRESHOLD = 100;
-
 export default function Navbar() {
 	const [isAnimated, setIsAnimated] = useState(false);
+	const breakpoint = useBreakpoint();
+	const THRESHOLD = useMemo(() => (breakpoint === "base" ? 25 : 100), [breakpoint]);
 
 	useEffect(() => {
 		setIsAnimated(window.scrollY > THRESHOLD);
@@ -18,7 +18,7 @@ export default function Navbar() {
 		return () => {
 			window.removeEventListener("scroll", onScroll);
 		};
-	}, []);
+	}, [THRESHOLD]);
 
 	const animatedStyles = useMemo<ContainerProps>(
 		() => (isAnimated ? { h: 75, boxShadow: "md" } : { h: 100 }),
@@ -49,9 +49,9 @@ export default function Navbar() {
 			{...animatedStyles}
 		>
 			<Container maxW="container.xl" h="100%">
-				<Flex as="ul" gap="3.5rem" alignItems="center" h="100%">
+				<Flex as="ul" alignItems="center" h="100%">
 					<Flex as="nav" gap="3.5rem" alignItems="center">
-						<Box as="li" mr="3.5rem">
+						<Box as="li" mr={[0, "3.5rem"]}>
 							<NextLink href="/" passHref>
 								<Link display="flex" userSelect="none" fontSize="4xl" color="accent">
 									<Icon as={BrandIcon} w="1em" h="1em" />

@@ -5,7 +5,7 @@ export const styles = {
 		},
 		"#__next": {
 			minH: "100vh",
-			pt: 200,
+			pt: [125, 200],
 		},
 		"::selection": {
 			bgColor: "blackAlpha.700",

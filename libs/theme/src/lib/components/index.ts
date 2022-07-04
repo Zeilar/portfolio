@@ -5,3 +5,4 @@ export * from "./Tooltip";
 export * from "./Link";
 export * from "./Container";
 export * from "./Textarea";
+export * from "./Accordion";
