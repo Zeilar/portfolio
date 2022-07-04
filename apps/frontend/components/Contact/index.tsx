@@ -73,9 +73,7 @@ export default function Contact() {
 								},
 							})}
 						/>
-						<FormErrorMessage mb={2} color="red.400">
-							{formState.errors.name?.message}
-						</FormErrorMessage>
+						<FormErrorMessage color="red.400">{formState.errors.name?.message}</FormErrorMessage>
 					</FormControl>
 					<FormControl isInvalid={Boolean(formState.errors.email)}>
 						<FormLabel htmlFor="email">Email address</FormLabel>
@@ -97,9 +95,7 @@ export default function Contact() {
 								},
 							})}
 						/>
-						<FormErrorMessage mb={2} color="red.400">
-							{formState.errors.email?.message}
-						</FormErrorMessage>
+						<FormErrorMessage color="red.400">{formState.errors.email?.message}</FormErrorMessage>
 					</FormControl>
 				</Flex>
 				<FormControl mt={[4, 8]} isInvalid={Boolean(formState.errors.message)}>
