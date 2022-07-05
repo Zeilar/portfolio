@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Box, Button, Container, Flex, Text, Link, Grid, Icon } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Text, Link, Grid, Icon, useBreakpoint } from "@chakra-ui/react";
 import avatar from "../assets/images/avatar.jpg";
 import NextImage from "next/image";
 import NextLink from "next/link";
@@ -22,6 +22,7 @@ interface Props {
 }
 
 export default function Index({ featuredProjects, technologies }: Props) {
+	const breakpoint = useBreakpoint();
 	return (
 		<>
 			<Container as="section" maxW="container.xl">
@@ -58,17 +59,27 @@ export default function Index({ featuredProjects, technologies }: Props) {
 			<Container as="section" maxW="container.xl" py={[6, "5rem"]}>
 				<Flex justifyContent="space-between">
 					<UnderlineHeader label="Featured Projects" />
-					<NextLink href="/projects" passHref>
-						<Button display={["none", "flex"]} as={Link} variant="primary-link">
-							All Projects
-							<ArrowForwardIcon />
-						</Button>
-					</NextLink>
+					{breakpoint !== "base" && (
+						<NextLink href="/projects" passHref>
+							<Button as={Link} variant="primary-link">
+								All Projects
+								<ArrowForwardIcon />
+							</Button>
+						</NextLink>
+					)}
 				</Flex>
 				<Grid gridGap={8} gridTemplateColumns={["repeat(1, 1fr)", "repeat(3, 1fr)"]}>
 					{featuredProjects.map(featuredProject => (
 						<FeaturedProject key={featuredProject.url} project={featuredProject} />
 					))}
+					{breakpoint === "base" && (
+						<NextLink href="/projects" passHref>
+							<Button as={Link} variant="primary-link">
+								All Projects
+								<ArrowForwardIcon />
+							</Button>
+						</NextLink>
+					)}
 				</Grid>
 			</Container>
 			<Box as="section" bgColor="gray.700" py={[6, "5rem"]}>
