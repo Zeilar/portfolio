@@ -17,29 +17,29 @@ interface Props {
 
 export default function Projects({ projects }: Props) {
 	return (
-		<Container maxW="container.xl" mb="5rem">
+		<Container maxW="container.xl" mb={[6, "5rem"]}>
 			<Head>
 				<title>Angelin | Projects</title>
 			</Head>
 			<UnderlineHeader label="Projects" />
-			<Flex flexDir="column" gap={10}>
+			<Flex flexDir="column" gap={[6, 10]}>
 				{projects.map((project, i) => (
 					<Grid
 						key={project.url}
 						as="article"
-						gridTemplateColumns="1fr 1fr"
+						gridTemplateColumns={["1fr", "1fr 1fr"]}
 						overflow="hidden"
 						color="text"
 						boxShadow="md"
 						bgColor="gray.700"
 						rounded="lg"
 					>
-						<Flex flexDir="column" p={10}>
+						<Flex flexDir="column" p={10} order={[1, 0]}>
 							<Text fontSize="4xl">{project.title}</Text>
 							<Text fontSize="sm" color="gray.400" mb={4}>
 								Released {parseProjectDate(project.releaseDate)}
 							</Text>
-							<Flex flexWrap="wrap" gap={2} mb={8}>
+							<Flex flexWrap="wrap" gap={2} mb={[2, 8]}>
 								{project.technologies.map(technology => (
 									<Tag
 										key={technology.name}
@@ -63,7 +63,7 @@ export default function Projects({ projects }: Props) {
 								display="-webkit-box"
 								overflow="hidden"
 								textOverflow="ellipsis"
-								mb={10}
+								mb={[6, 10]}
 							>
 								{project.description}
 							</Text>
