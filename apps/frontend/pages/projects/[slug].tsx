@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Box, Button, Container, Flex, Link, Tag, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Tag, Text, useBreakpoint } from "@chakra-ui/react";
 import { getProject, getProjects } from "../../common/queries";
 import UnderlineHeader from "../../components/UnderlineHeader";
 import { Project } from "../../types/project";
@@ -8,43 +8,28 @@ import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } fro
 import { ParsedUrlQuery } from "querystring";
 import { parseProjectDate } from "../../common/helpers";
 import NextImage from "next/image";
-import { ArrowBackIcon, ExternalLinkIcon } from "@chakra-ui/icons";
-import NextLink from "next/link";
-import { useRouter } from "next/router";
 import Head from "next/head";
+import ProjectNavigation from "../../components/ProjectNavigation";
 
 interface Props {
 	project: Project;
 }
 
 export default function ProjectPage({ project }: Props) {
-	const { back } = useRouter();
+	const breakpoint = useBreakpoint({ ssr: true });
 	return (
-		<Container maxW="container.xl" as="article" mb="5rem">
+		<Container maxW="container.xl" as="article" mb={[6, "5rem"]}>
 			<Head>
 				<title>{`Angelin | ${project.title}`}</title>
 			</Head>
 			<Flex justifyContent="space-between">
 				<UnderlineHeader labelProps={{ fontSize: "6xl", lineHeight: 1.25, mb: 10 }} label={project.title} />
-				<Flex gap={2} alignItems="flex-start">
-					<Button variant="secondary-icon" onClick={back}>
-						<ArrowBackIcon mr={3} fontSize="xl" />
-						Back
-					</Button>
-					<NextLink passHref href={project.url}>
-						<Link isExternal _hover={{ textDecor: "none" }}>
-							<Button variant="primary-icon">
-								<ExternalLinkIcon mr={3} fontSize="xl" />
-								View app
-							</Button>
-						</Link>
-					</NextLink>
-				</Flex>
+				{breakpoint !== "base" && <ProjectNavigation url={project.url} />}
 			</Flex>
 			<Text mb={4} color="gray.400">
 				Released {parseProjectDate(project.releaseDate)}
 			</Text>
-			<Box maxW="75%">
+			<Box maxW={["unset", "75%"]}>
 				<Flex flexWrap="wrap" gap={2} mb={8}>
 					{project.technologies.map(technology => (
 						<Tag
@@ -60,15 +45,25 @@ export default function ProjectPage({ project }: Props) {
 						</Tag>
 					))}
 				</Flex>
-				<Text color="gray.200" mb={8}>
+				{breakpoint === "base" && (
+					<NextImage
+						src={project.previewImage.url}
+						width={project.previewImage.width}
+						height={project.previewImage.height}
+					/>
+				)}
+				<Text color="gray.200" mb={8} mt={[2, 0]}>
 					{project.description}
 				</Text>
 			</Box>
-			<NextImage
-				src={project.previewImage.url}
-				width={project.previewImage.width}
-				height={project.previewImage.height}
-			/>
+			{breakpoint === "base" && <ProjectNavigation url={project.url} />}
+			{breakpoint !== "base" && (
+				<NextImage
+					src={project.previewImage.url}
+					width={project.previewImage.width}
+					height={project.previewImage.height}
+				/>
+			)}
 		</Container>
 	);
 }

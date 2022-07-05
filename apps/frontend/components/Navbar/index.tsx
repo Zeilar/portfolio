@@ -6,7 +6,7 @@ import { ReactComponent as BrandIcon } from "../../assets/svgs/brand.svg";
 
 export default function Navbar() {
 	const [isAnimated, setIsAnimated] = useState(false);
-	const breakpoint = useBreakpoint();
+	const breakpoint = useBreakpoint({ ssr: true });
 	const THRESHOLD = useMemo(() => (breakpoint === "base" ? 25 : 100), [breakpoint]);
 
 	useEffect(() => {

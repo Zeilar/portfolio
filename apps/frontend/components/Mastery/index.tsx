@@ -1,5 +1,5 @@
 import { Box, Container, Text, useBreakpoint } from "@chakra-ui/react";
-import { Technology } from "apps/frontend/types/technology";
+import { Technology } from "../../types/technology";
 import UnderlineHeader from "../UnderlineHeader";
 import Default from "./Default";
 import Mobile from "./Mobile";
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function Mastery({ technologies }: Props) {
-	const breakpoint = useBreakpoint();
+	const breakpoint = useBreakpoint({ ssr: true });
 	return (
 		<Box as="section" py={[6, "5rem"]}>
 			<Container maxW="container.xl">
