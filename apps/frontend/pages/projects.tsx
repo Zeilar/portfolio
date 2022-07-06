@@ -20,6 +20,9 @@ export default function Projects({ projects }: Props) {
 		<Container maxW="container.xl" mb={[6, "5rem"]}>
 			<Head>
 				<title>Angelin | Projects</title>
+				<meta property="og:title" content="Projects" />
+				<meta property="og:url" content="https://angelin.dev/projects" />
+				<meta property="og:site_name" content="Angelin" />
 			</Head>
 			<UnderlineHeader label="Projects" />
 			<Flex flexDir="column" gap={[6, 10]}>

@@ -11,6 +11,7 @@ import UnderlineHeader from "../components/UnderlineHeader";
 import { Project } from "../types/project";
 import { Technology } from "../types/technology";
 import { ReactComponent as BrandIcon } from "../assets/svgs/brand.svg";
+import angelinOg from "../assets/images/angelin-og.png";
 import { GetStaticPropsResult } from "next";
 import Contact from "../components/Contact";
 import Head from "next/head";
@@ -28,6 +29,14 @@ export default function Index({ featuredProjects, technologies }: Props) {
 			<Container as="section" maxW="container.xl">
 				<Head>
 					<title>Angelin</title>
+					<meta property="og:title" content="Home" />
+					<meta property="og:image" content={angelinOg.src} />
+					<meta property="og:url" content="https://angelin.dev" />
+					<meta
+						property="og:description"
+						content="Come on in and explore my corner of the web! Here you will find my portfolio and learn about who I am and what I do."
+					/>
+					<meta property="og:site_name" content="Angelin" />
 				</Head>
 				<Flex alignItems="center" justifyContent="space-between" minH={[null, "50rem"]}>
 					<Box>

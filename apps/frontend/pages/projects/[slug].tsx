@@ -21,6 +21,11 @@ export default function ProjectPage({ project }: Props) {
 		<Container maxW="container.xl" as="article" mb={[6, "5rem"]}>
 			<Head>
 				<title>{`Angelin | ${project.title}`}</title>
+				<meta property="og:title" content={project.title} />
+				<meta property="og:image" content={project.previewImage.url} />
+				<meta property="og:url" content={`https://angelin.dev/projects/${project.slug}`} />
+				<meta property="og:description" content={project.description} />
+				<meta property="og:site_name" content="Angelin" />
 			</Head>
 			<Flex justifyContent="space-between">
 				<UnderlineHeader labelProps={{ fontSize: "6xl", lineHeight: 1.25, mb: 10 }} label={project.title} />
