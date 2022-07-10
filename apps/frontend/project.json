@@ -3,6 +3,24 @@
 	"sourceRoot": "apps/frontend",
 	"projectType": "application",
 	"targets": {
+		"docker:run": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "docker run --name angelin.dev -p 3050:3050 -d zeilar/angelin.dev"
+			}
+		},
+		"docker:push": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "docker push zeilar/angelin.dev"
+			}
+		},
+		"docker:build": {
+			"executor": "nx:run-commands",
+			"options": {
+				"command": "docker build -f ./Dockerfile -t zeilar/angelin.dev dist/apps/frontend"
+			}
+		},
 		"build": {
 			"executor": "@nrwl/next:build",
 			"outputs": ["{options.outputPath}"],

@@ -55,6 +55,7 @@ export default function ProjectPage({ project }: Props) {
 						src={project.previewImage.url}
 						width={project.previewImage.width}
 						height={project.previewImage.height}
+						objectFit="cover"
 					/>
 				)}
 				<Text color="gray.200" mb={8} mt={[2, 0]}>

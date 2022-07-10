@@ -61,6 +61,7 @@ export default function Projects({ projects }: Props) {
 								fontSize="sm"
 								color="gray.200"
 								lineHeight="6"
+								whiteSpace="break-spaces"
 								mt={4}
 								sx={{ WebkitLineClamp: 8, WebkitBoxOrient: "vertical" }}
 								display="-webkit-box"
