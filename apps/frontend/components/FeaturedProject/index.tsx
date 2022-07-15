@@ -20,6 +20,7 @@ export default function FeaturedProject({ project }: Props) {
 				rounded="lg"
 				transitionDuration="0.5s"
 				overflow="hidden"
+				whiteSpace="break-spaces"
 				_hover={{ transform: "scale(1.03)", bgColor: "gray.600" }}
 			>
 				<Flex h={300} overflow="hidden" justifyContent="center">

@@ -6,7 +6,7 @@
 		"docker:run": {
 			"executor": "nx:run-commands",
 			"options": {
-				"command": "docker run --name angelin.dev -p 3050:3050 -d zeilar/angelin.dev"
+				"command": "docker run --name angelin.dev -p 3000:3000 -d zeilar/angelin.dev"
 			}
 		},
 		"docker:push": {

@@ -58,7 +58,7 @@ export default function ProjectPage({ project }: Props) {
 						objectFit="cover"
 					/>
 				)}
-				<Text color="gray.200" mb={8} mt={[2, 0]}>
+				<Text color="gray.200" mb={8} mt={[2, 0]} whiteSpace="break-spaces">
 					{project.description}
 				</Text>
 			</Box>
