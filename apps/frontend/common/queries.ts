@@ -47,7 +47,7 @@ export function getTechnologies() {
 	};
 }
 
-export function getPosts() {
+export function getPosts(search?: string) {
 	return () => {
 		const params = new URLSearchParams({
 			content_type: "post",
