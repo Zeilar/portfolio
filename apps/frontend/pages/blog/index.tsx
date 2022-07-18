@@ -60,7 +60,6 @@ export default function Blog(props: Props) {
 		}
 		replace("");
 		reset();
-		console.log("set to", props.posts);
 		setPosts(originalPosts.current);
 	}
 
