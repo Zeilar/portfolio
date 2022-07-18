@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { Post } from "../types/post";
+
 const ACCESS_TOKEN = process.env.NX_CONTENTFUL_ACCESS_TOKEN;
 const SPACE_ID = process.env.NX_CONTENTFUL_SPACE_ID;
 
@@ -47,16 +51,23 @@ export function getTechnologies() {
 	};
 }
 
-export function getPosts(search?: string) {
-	return () => {
-		const params = new URLSearchParams({
-			content_type: "post",
-			include: "1",
-		});
-		return fetch(`https://cdn.contentful.com/spaces/${SPACE_ID}/entries?${params.toString()}`, {
-			headers: {
-				Authorization: `Bearer ${ACCESS_TOKEN}`,
-			},
-		});
-	};
+export async function getPosts(search = ""): Promise<Post[]> {
+	const params = new URLSearchParams({
+		content_type: "post",
+		include: "1",
+		"fields.title[match]": search,
+	});
+	const response = await fetch(`https://cdn.contentful.com/spaces/${SPACE_ID}/entries?${params.toString()}`, {
+		headers: {
+			Authorization: `Bearer ${ACCESS_TOKEN}`,
+		},
+	});
+	const data = await response.json();
+	return data.items.map((project: any) => {
+		const asset = data.includes.Asset.find((asset: any) => project.fields.previewImage.sys.id === asset.sys.id);
+		return {
+			...project.fields,
+			previewImage: `https:${asset.fields.file.url}`,
+		};
+	});
 }
