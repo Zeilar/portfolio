@@ -49,9 +49,9 @@ export default function Navbar() {
 			{...animatedStyles}
 		>
 			<Container maxW="container.xl" h="100%">
-				<Flex as="ul" alignItems="center" h="100%">
-					<Flex as="nav" gap="3.5rem" alignItems="center">
-						<Box as="li" mr={[0, "3.5rem"]}>
+				<Flex as="nav" alignItems="center" h="100%">
+					<Flex as="ul" gap="3.5rem" alignItems="center">
+						<Box as="li">
 							<NextLink href="/" passHref>
 								<Link display="flex" userSelect="none" fontSize="4xl" color="accent">
 									<Icon as={BrandIcon} w="1em" h="1em" />
@@ -63,6 +63,9 @@ export default function Navbar() {
 						</li>
 						<li>
 							<StyledLink href="/projects">Projects</StyledLink>
+						</li>
+						<li>
+							<StyledLink href="/blog">Blog</StyledLink>
 						</li>
 					</Flex>
 				</Flex>

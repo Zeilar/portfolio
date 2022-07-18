@@ -46,3 +46,17 @@ export function getTechnologies() {
 		});
 	};
 }
+
+export function getPosts() {
+	return () => {
+		const params = new URLSearchParams({
+			content_type: "post",
+			include: "1",
+		});
+		return fetch(`https://cdn.contentful.com/spaces/${SPACE_ID}/entries?${params.toString()}`, {
+			headers: {
+				Authorization: `Bearer ${ACCESS_TOKEN}`,
+			},
+		});
+	};
+}

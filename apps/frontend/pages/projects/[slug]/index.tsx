@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Box, Container, Flex, Tag, Text, useBreakpoint } from "@chakra-ui/react";
-import { getProject, getProjects } from "../../common/queries";
-import UnderlineHeader from "../../components/UnderlineHeader";
-import { Project } from "../../types/project";
-import { GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult } from "next";
-import { ParsedUrlQuery } from "querystring";
-import { parseProjectDate } from "../../common/helpers";
+import { getProject } from "../../../common/queries";
+import UnderlineHeader from "../../../components/UnderlineHeader";
+import { Project } from "../../../types/project";
+import { GetServerSidePropsResult, GetStaticPropsContext } from "next";
+import { readableDate } from "../../../common/helpers";
 import NextImage from "next/image";
 import Head from "next/head";
-import ProjectNavigation from "../../components/ProjectNavigation";
+import ProjectNavigation from "../../../components/ProjectNavigation";
 
 interface Props {
 	project: Project;
@@ -31,8 +30,8 @@ export default function ProjectPage({ project }: Props) {
 				<UnderlineHeader labelProps={{ fontSize: "6xl", lineHeight: 1.25, mb: 10 }} label={project.title} />
 				{breakpoint !== "base" && <ProjectNavigation url={project.url} />}
 			</Flex>
-			<Text mb={4} color="gray.400">
-				Released {parseProjectDate(project.releaseDate)}
+			<Text mb={4} color="gray.400" fontWeight={500}>
+				Released {readableDate(project.releaseDate)}
 			</Text>
 			<Box maxW={["unset", "75%"]}>
 				<Flex flexWrap="wrap" gap={2} mb={8}>
@@ -74,23 +73,9 @@ export default function ProjectPage({ project }: Props) {
 	);
 }
 
-export async function getStaticPaths(): Promise<GetStaticPathsResult<ParsedUrlQuery>> {
-	const fetcher = getProjects(true);
-	const response = await fetcher();
-	const data = await response.json();
-	return {
-		paths: data.items.map((project: any) => ({
-			params: {
-				slug: project.fields.slug,
-			},
-		})),
-		fallback: false,
-	};
-}
-
-export async function getStaticProps(
+export async function getServerSideProps(
 	ctx: GetStaticPropsContext<{ slug: string }>
-): Promise<GetStaticPropsResult<Props>> {
+): Promise<GetServerSidePropsResult<Props>> {
 	const fetcher = getProject(ctx.params.slug);
 	const response = await fetcher();
 	const data = await response.json();

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Button, Container, Flex, Grid, Link, Tag, Text } from "@chakra-ui/react";
-import { GetStaticPropsResult } from "next";
+import { Button, Container, Flex, Grid, Heading, Link, Tag, Text } from "@chakra-ui/react";
+import { GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { parseProjectDate } from "../common/helpers";
-import { getProjects } from "../common/queries";
-import UnderlineHeader from "../components/UnderlineHeader";
-import { Project } from "../types/project";
+import { readableDate } from "../../common/helpers";
+import { getProjects } from "../../common/queries";
+import UnderlineHeader from "../../components/UnderlineHeader";
+import { Project } from "../../types/project";
 
 interface Props {
 	projects: Project[];
@@ -38,9 +38,11 @@ export default function Projects({ projects }: Props) {
 						rounded="lg"
 					>
 						<Flex flexDir="column" p={10} order={[1, 0]}>
-							<Text fontSize="4xl">{project.title}</Text>
-							<Text fontSize="sm" color="gray.400" mb={4}>
-								Released {parseProjectDate(project.releaseDate)}
+							<Heading fontWeight={500} size="xl" mb={2}>
+								{project.title}
+							</Heading>
+							<Text fontSize="sm" color="gray.400" mb={4} fontWeight={500}>
+								Released {readableDate(project.releaseDate)}
 							</Text>
 							<Flex flexWrap="wrap" gap={2} mb={[2, 8]}>
 								{project.technologies.map(technology => (
@@ -100,7 +102,7 @@ export default function Projects({ projects }: Props) {
 	);
 }
 
-export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
+export async function getServerSideProps(): Promise<GetServerSidePropsResult<Props>> {
 	const fetcher = getProjects();
 	const response = await fetcher();
 	const data = await response.json();

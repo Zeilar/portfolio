@@ -6,6 +6,8 @@ export const styles = {
 		"#__next": {
 			minH: "100vh",
 			pt: [125, 200],
+			display: "flex",
+			flexDir: "column",
 		},
 		"::selection": {
 			bgColor: "blackAlpha.700",

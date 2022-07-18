@@ -1,4 +1,4 @@
-import { Icon, Link, Text } from "@chakra-ui/react";
+import { Heading, Icon, Link, Text } from "@chakra-ui/react";
 import { Technology } from "../../types/technology";
 import NextImage from "next/image";
 import NextLink from "next/link";
@@ -38,9 +38,9 @@ export default function TechnologyCard({ technology }: Props) {
 					width={50}
 					height={50}
 				/>
-				<Text fontSize="3xl" mt={6}>
+				<Heading fontWeight={500} size="lg" mt={6} mb={2}>
 					{technology.name}
-				</Text>
+				</Heading>
 				<Text
 					fontSize="sm"
 					color="gray.200"

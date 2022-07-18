@@ -1,4 +1,4 @@
-export function parseProjectDate(date: string) {
+export function readableDate(date: string | number | Date) {
 	const [month, , , , year] = new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).formatToParts(new Date(date));
 	return `${month.value} ${year.value}`;
 }

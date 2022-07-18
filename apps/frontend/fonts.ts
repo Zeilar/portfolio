@@ -4,6 +4,7 @@
 
 // Inter
 import "@fontsource/inter/500.css";
+import "@fontsource/inter/400.css";
 
 // Plus Jakarta Sans
 import "@fontsource/plus-jakarta-sans/500.css";

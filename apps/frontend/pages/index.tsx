@@ -12,7 +12,7 @@ import { Project } from "../types/project";
 import { Technology } from "../types/technology";
 import { ReactComponent as BrandIcon } from "../assets/svgs/brand.svg";
 import angelinOg from "../assets/images/angelin-og.png";
-import { GetStaticPropsResult } from "next";
+import { GetServerSidePropsResult } from "next";
 import Contact from "../components/Contact";
 import Head from "next/head";
 import Mastery from "../components/Mastery";
@@ -124,7 +124,7 @@ export default function Index({ featuredProjects, technologies }: Props) {
 	);
 }
 
-export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
+export async function getServerSideProps(): Promise<GetServerSidePropsResult<Props>> {
 	const projectsFetcher = getProjects(true);
 	const projectsResponse = await projectsFetcher();
 	const projectsData = await projectsResponse.json();

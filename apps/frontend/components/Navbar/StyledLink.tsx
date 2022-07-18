@@ -14,7 +14,7 @@ export default function StyledLink({ href, ...props }: Props) {
 			<Link
 				aria-current={router.pathname === href ? "page" : undefined}
 				pos="relative"
-				py={2}
+				py={4}
 				fontWeight={500}
 				color="gray.200"
 				fontSize="lg"
