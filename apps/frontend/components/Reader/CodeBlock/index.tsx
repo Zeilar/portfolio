@@ -1,5 +1,7 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { format } from "prettier";
+import parserTypeScript from "prettier/parser-typescript";
 
 interface Props {
 	code: string;
@@ -19,7 +21,7 @@ export default function CodeBlock({ code, language }: Props) {
 				},
 			}}
 		>
-			{code}
+			{format(code, { tabWidth: 2, parser: "typescript", plugins: [parserTypeScript] })}
 		</SyntaxHighlighter>
 	);
 }
