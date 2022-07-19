@@ -2,6 +2,7 @@
 
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { Button, Container, Flex, Grid, Heading, Link, Tag, Text } from "@chakra-ui/react";
+import { Asset } from "../../types/asset";
 import { GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import NextImage from "next/image";
@@ -107,7 +108,7 @@ export async function getServerSideProps(): Promise<GetServerSidePropsResult<Pro
 	const response = await fetcher();
 	const data = await response.json();
 	const projects: Project[] = data.items.map((project: any) => {
-		const asset = data.includes.Asset.find((asset: any) => project.fields.previewImage.sys.id === asset.sys.id);
+		const asset = data.includes.Asset.find((asset: Asset) => project.fields.previewImage.sys.id === asset.sys.id);
 		const technologies = project.fields.technologies.map(
 			(technology: any) => data.includes.Entry.find((entry: any) => technology.sys.id === entry.sys.id).fields
 		);

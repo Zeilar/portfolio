@@ -4,11 +4,12 @@ import { Box, Container, Flex, Tag, Text, useBreakpoint } from "@chakra-ui/react
 import { getProject } from "../../../common/queries";
 import UnderlineHeader from "../../../components/UnderlineHeader";
 import { Project } from "../../../types/project";
-import { GetServerSidePropsResult, GetStaticPropsContext } from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { readableDate } from "../../../common/helpers";
 import NextImage from "next/image";
 import Head from "next/head";
 import ProjectNavigation from "../../../components/ProjectNavigation";
+import { Asset } from "../../../types/asset";
 
 interface Props {
 	project: Project;
@@ -74,18 +75,23 @@ export default function ProjectPage({ project }: Props) {
 }
 
 export async function getServerSideProps(
-	ctx: GetStaticPropsContext<{ slug: string }>
+	ctx: GetServerSidePropsContext<{ slug: string }>
 ): Promise<GetServerSidePropsResult<Props>> {
+	if (!ctx.params?.slug) {
+		return {
+			notFound: true,
+		};
+	}
 	const fetcher = getProject(ctx.params.slug);
 	const response = await fetcher();
 	const data = await response.json();
 	const project = data.items[0];
-	const asset = data.includes.Asset.find((asset: any) => project.fields.previewImage.sys.id === asset.sys.id);
+	const asset = data.includes.Asset.find((asset: Asset) => project.fields.previewImage.sys.id === asset.sys.id);
 	return {
 		props: {
 			project: {
 				...project.fields,
-				technologies: data.includes.Entry.map(({ fields }) => ({
+				technologies: data.includes.Entry.map(({ fields }: any) => ({
 					name: fields.name,
 					color: fields.color,
 				})),
