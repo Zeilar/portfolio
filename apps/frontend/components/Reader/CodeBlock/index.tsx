@@ -18,6 +18,7 @@ export default function CodeBlock({ code, language }: Props) {
 					background: "var(--chakra-colors-gray-900)",
 					borderRadius: "var(--chakra-radii-lg)",
 					padding: "var(--chakra-sizes-6)",
+					overflow: "auto",
 				},
 			}}
 		>
