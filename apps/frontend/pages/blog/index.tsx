@@ -1,5 +1,5 @@
 import { getPosts } from "../../common/queries";
-import { GetServerSidePropsResult, NextPageContext } from "next";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import UnderlineHeader from "../../components/UnderlineHeader";
 import {
 	Box,
@@ -23,8 +23,6 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Asset } from "../../types/asset";
-
-import Reader from "../../components/Reader";
 
 interface Fields {
 	search: string;
@@ -108,12 +106,13 @@ export default function Blog(props: Props) {
 					))}
 				</Flex>
 			)}
-			<Reader assets={props.assets} document={posts[0].body} />
 		</Container>
 	);
 }
 
-export async function getServerSideProps(ctx: NextPageContext): Promise<GetServerSidePropsResult<Props>> {
+export async function getServerSideProps(
+	ctx: GetServerSidePropsContext<{ search: string }>
+): Promise<GetServerSidePropsResult<Props>> {
 	return {
 		props: await getPosts(ctx.query.search as string | undefined),
 	};
