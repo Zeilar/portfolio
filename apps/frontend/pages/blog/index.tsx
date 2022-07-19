@@ -87,7 +87,7 @@ export default function Blog(props: Props) {
 					<Heading size="lg" fontWeight={500}>
 						Results for: &nbsp;
 						<Text as="span" color="accent" fontWeight={600}>
-							{searchQuery}
+							&quot;{searchQuery}&quot;
 						</Text>
 					</Heading>
 					<Button mt={2} variant="link" size="lg" color="accent" _active={{}} onClick={resetSearch}>
