@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Asset } from "../types/asset";
+import { Entry } from "../types/entry";
 import { Post } from "../types/post";
 
 const ACCESS_TOKEN = process.env.NX_CONTENTFUL_ACCESS_TOKEN;
@@ -99,5 +100,6 @@ export async function getPost(slug: string) {
 	return {
 		post: posts[0],
 		assets: data.includes.Asset as Asset[],
+		entries: data.includes.Entry as Entry[],
 	};
 }

@@ -21,9 +21,18 @@ export type NodeType =
 	| "blockquote"
 	| "hr"
 	| "paragraph"
-	| "embedded-asset-block";
+	| "embedded-asset-block"
+	| "embedded-entry-inline";
 
-export type RTNode = RTParagraph | RTAsset | RTHeading | RTUnorderedList | RTOrderedList | RTHr | RTBlockQuote;
+export type RTNode =
+	| RTParagraph
+	| RTInlineAsset
+	| RTHeading
+	| RTUnorderedList
+	| RTOrderedList
+	| RTHr
+	| RTBlockQuote
+	| RTInlineEntry;
 
 export interface RTDocument {
 	nodeType: "document";
@@ -54,7 +63,7 @@ export interface RTOrderedList {
 
 export interface RTParagraph {
 	nodeType: "paragraph";
-	content: (RTText | RTHyperLink)[];
+	content: (RTText | RTHyperLink | RTInlineEntry)[];
 }
 
 export interface RTListItem {
@@ -80,14 +89,23 @@ export interface RTHr {
 	nodeType: "hr";
 }
 
-export interface RTAsset {
+export interface RTInlineAsset {
 	nodeType: "embedded-asset-block";
 	data: {
 		target: {
 			sys: {
 				id: string;
-				type: "Link";
-				linkType: "Asset";
+			};
+		};
+	};
+}
+
+export interface RTInlineEntry {
+	nodeType: "embedded-entry-inline";
+	data: {
+		target: {
+			sys: {
+				id: string;
 			};
 		};
 	};

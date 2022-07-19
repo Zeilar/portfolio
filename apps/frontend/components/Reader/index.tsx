@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import { Entry } from "../../types/entry";
 import { Asset } from "../../types/asset";
 import { RTDocument } from "../../types/post";
 import BlockQuote from "./BlockQuote";
@@ -12,15 +13,16 @@ import UnorderedList from "./UnorderedList";
 interface Props {
 	document: RTDocument;
 	assets: Asset[];
+	entries: Entry[];
 }
 
-export default function Reader({ assets, document }: Props) {
+export default function Reader({ assets, document, entries }: Props) {
 	return (
 		<Box whiteSpace="break-spaces">
 			{document.content.map((node, i) => {
 				switch (node.nodeType) {
 					case "paragraph":
-						return <Paragraph key={i} paragraph={node} />;
+						return <Paragraph key={i} paragraph={node} entries={entries} />;
 					case "heading-1":
 						return <Heading key={i} level={1} heading={node} />;
 					case "heading-2":
@@ -47,11 +49,15 @@ export default function Reader({ assets, document }: Props) {
 						return image ? (
 							// eslint-disable-next-line jsx-a11y/alt-text
 							<Image
+								key={i}
 								src={`https:${image.fields.file.url}`}
 								height={image.fields.file.details.image.height}
 								width={image.fields.file.details.image.width}
 							/>
 						) : null;
+					case "embedded-entry-inline":
+						console.log(node);
+						return null;
 					default:
 						return null;
 				}

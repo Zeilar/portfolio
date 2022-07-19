@@ -12,6 +12,5 @@ export interface Asset {
 	};
 	sys: {
 		id: string;
-		type: "Asset";
 	};
 }
