@@ -15,7 +15,7 @@ interface Props {
 
 export default function BlogPost({ assets, entries, post }: Props) {
 	return (
-		<Container maxW="container.lg">
+		<Container maxW="container.lg" mb="5rem">
 			<UnderlineHeader label={post.title} />
 			<Reader entries={entries} assets={assets} document={post.body} />
 		</Container>
