@@ -1,20 +1,23 @@
+import { Box } from "@chakra-ui/react";
+import { Asset } from "../../types/asset";
 import { RTDocument } from "../../types/post";
 import BlockQuote from "./BlockQuote";
 import Heading from "./Heading";
 import Hr from "./Hr";
+import Image from "./Image";
 import OrderedList from "./OrderedList";
 import Paragraph from "./Paragraph";
 import UnorderedList from "./UnorderedList";
 
 interface Props {
 	document: RTDocument;
+	assets: Asset[];
 }
 
-export default function Reader({ document }: Props) {
+export default function Reader({ assets, document }: Props) {
 	return (
-		<div>
+		<Box whiteSpace="break-spaces">
 			{document.content.map((node, i) => {
-				console.log(node);
 				switch (node.nodeType) {
 					case "paragraph":
 						return <Paragraph key={i} paragraph={node} />;
@@ -38,10 +41,21 @@ export default function Reader({ document }: Props) {
 						return <Hr key={i} />;
 					case "blockquote":
 						return <BlockQuote key={i} blockQuote={node} />;
+					case "embedded-asset-block":
+						// eslint-disable-next-line no-case-declarations
+						const image: Asset | undefined = assets.find(asset => asset.sys.id === node.data.target.sys.id);
+						return image ? (
+							// eslint-disable-next-line jsx-a11y/alt-text
+							<Image
+								src={`https:${image.fields.file.url}`}
+								height={image.fields.file.details.image.height}
+								width={image.fields.file.details.image.width}
+							/>
+						) : null;
 					default:
 						return null;
 				}
 			})}
-		</div>
+		</Box>
 	);
 }

@@ -22,6 +22,7 @@ import { getReadingMinutes } from "../../common/helpers";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { Asset } from "../../types/asset";
 
 import Reader from "../../components/Reader";
 
@@ -31,6 +32,7 @@ interface Fields {
 
 interface Props {
 	posts: Post[];
+	assets: Asset[];
 }
 
 export default function Blog(props: Props) {
@@ -47,7 +49,7 @@ export default function Blog(props: Props) {
 		}
 		try {
 			await replace(`?search=${search}`);
-			const posts = await getPosts(search);
+			const { posts } = await getPosts(search);
 			setPosts(posts);
 		} catch (error) {
 			toast({ status: "error", title: "Error when searching" });
@@ -106,15 +108,13 @@ export default function Blog(props: Props) {
 					))}
 				</Flex>
 			)}
-			<Reader document={posts[0].body} />
+			<Reader assets={props.assets} document={posts[0].body} />
 		</Container>
 	);
 }
 
 export async function getServerSideProps(ctx: NextPageContext): Promise<GetServerSidePropsResult<Props>> {
 	return {
-		props: {
-			posts: await getPosts(ctx.query.search as string | undefined),
-		},
+		props: await getPosts(ctx.query.search as string | undefined),
 	};
 }

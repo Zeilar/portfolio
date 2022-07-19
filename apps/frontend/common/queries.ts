@@ -51,7 +51,7 @@ export function getTechnologies() {
 	};
 }
 
-export async function getPosts(search = ""): Promise<Post[]> {
+export async function getPosts(search = ""): Promise<{ posts: Post[]; assets: any[] }> {
 	const params = new URLSearchParams({
 		content_type: "post",
 		include: "1",
@@ -63,11 +63,15 @@ export async function getPosts(search = ""): Promise<Post[]> {
 		},
 	});
 	const data = await response.json();
-	return data.items.map((project: any) => {
+	const posts = data.items.map((project: any) => {
 		const asset = data.includes.Asset.find((asset: any) => project.fields.previewImage.sys.id === asset.sys.id);
 		return {
 			...project.fields,
 			previewImage: `https:${asset.fields.file.url}`,
 		};
 	});
+	return {
+		posts,
+		assets: data.includes.Asset,
+	} as const;
 }
