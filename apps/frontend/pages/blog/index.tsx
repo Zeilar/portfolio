@@ -68,11 +68,11 @@ export default function Blog(props: Props) {
 	}, [searchQuery]);
 
 	return (
-		<Container maxW="container.xl">
+		<Container maxW="container.xl" mb={[6, "5rem"]}>
 			<UnderlineHeader label="Blog" />
 			<FormControl as="form" onSubmit={handleSubmit(submit)} isInvalid={Boolean(formState.errors.search)} mb={8}>
 				<FormLabel>Search</FormLabel>
-				<Box w="25%">
+				<Box w={["auto", "25%"]}>
 					<Input
 						variant="filled"
 						placeholder="Hello world"
@@ -100,7 +100,7 @@ export default function Blog(props: Props) {
 			{formState.isSubmitting ? (
 				<Spinner color="accent" size="xl" />
 			) : (
-				<Flex flexDir="column" w="50%" gap={4}>
+				<Flex flexDir="column" w={["auto", "50%"]} gap={4}>
 					{posts.map(({ body, ...post }, i) => (
 						<BlogCard key={i} minutes={getReadingMinutes(body)} {...post} />
 					))}

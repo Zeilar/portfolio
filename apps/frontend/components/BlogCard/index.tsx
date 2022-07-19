@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Link, Tag, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, Tag, Text, useBreakpointValue } from "@chakra-ui/react";
 import { readableDate } from "../../common/helpers";
 import NextImage from "next/image";
 import NextLink from "next/link";
@@ -13,6 +13,7 @@ interface Props {
 }
 
 export default function BlogCard({ previewImage, minutes, title, tags, publishedAt, slug }: Props) {
+	const breakpoint = useBreakpointValue({ base: { width: 500, height: 250 }, sm: { width: 250, height: 100 } });
 	return (
 		<NextLink passHref href={`/blog/${slug}`}>
 			<Link
@@ -26,7 +27,7 @@ export default function BlogCard({ previewImage, minutes, title, tags, published
 				overflow="hidden"
 				_hover={{ bgColor: "gray.600" }}
 			>
-				<Flex as="article" p={6} alignItems="flex-start">
+				<Flex as="article" p={6} alignItems="flex-start" flexDir={["column-reverse", "row"]}>
 					<Box flexGrow={1}>
 						<Heading size="lg" fontWeight={500} noOfLines={2}>
 							{title}
@@ -53,8 +54,13 @@ export default function BlogCard({ previewImage, minutes, title, tags, published
 						)}
 					</Box>
 					{previewImage && (
-						<Box ml={12}>
-							<NextImage src={previewImage} width={200} height={100} objectFit="cover" />
+						<Box ml={[0, 12]} mb={[4, 0]}>
+							<NextImage
+								src={previewImage}
+								width={breakpoint?.width}
+								height={breakpoint?.height}
+								objectFit="cover"
+							/>
 						</Box>
 					)}
 				</Flex>
