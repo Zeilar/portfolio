@@ -3,13 +3,13 @@ import { GetServerSidePropsResult, NextPageContext } from "next";
 import UnderlineHeader from "../../components/UnderlineHeader";
 import {
 	Box,
+	Button,
 	Container,
 	Flex,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Heading,
-	IconButton,
 	Input,
 	Spinner,
 	Text,
@@ -21,8 +21,7 @@ import { useState } from "react";
 import { getReadingMinutes } from "../../common/helpers";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { CloseIcon } from "@chakra-ui/icons";
-import { useRef } from "react";
+import { useEffect } from "react";
 
 interface Fields {
 	search: string;
@@ -33,7 +32,6 @@ interface Props {
 }
 
 export default function Blog(props: Props) {
-	const originalPosts = useRef(props.posts);
 	const [posts, setPosts] = useState(props.posts);
 	const { register, handleSubmit, formState, watch, reset } = useForm<Fields>({ defaultValues: { search: "" } });
 	const { replace, query } = useRouter();
@@ -60,8 +58,12 @@ export default function Blog(props: Props) {
 		}
 		replace("");
 		reset();
-		setPosts(originalPosts.current);
 	}
+
+	useEffect(() => {
+		submit({ search: searchField });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchQuery]);
 
 	return (
 		<Container maxW="container.xl">
@@ -72,36 +74,26 @@ export default function Blog(props: Props) {
 					<Input
 						variant="filled"
 						placeholder="Hello world"
-						pr={searchField ? 10 : undefined}
 						{...register("search", {
 							required: { value: true, message: "Field is required." },
 							minLength: { value: 3, message: "Minimum 3 characters." },
 						})}
 					/>
-					{searchField && (
-						<IconButton
-							transform="translateY(-50%)"
-							size="sm"
-							display="flex"
-							variant="unstyled"
-							aria-label="Reset search"
-							icon={<CloseIcon />}
-							pos="absolute"
-							right={2}
-							top="50%"
-							onClick={resetSearch}
-						/>
-					)}
 				</Box>
 				<FormErrorMessage>{formState.errors.search?.message}</FormErrorMessage>
 			</FormControl>
 			{searchQuery && (
-				<Heading size="lg" mb={4} fontWeight={500}>
-					Results for: &nbsp;
-					<Text as="span" color="accent" fontWeight={600}>
-						{searchQuery}
-					</Text>
-				</Heading>
+				<Box>
+					<Heading size="lg" fontWeight={500}>
+						Results for: &nbsp;
+						<Text as="span" color="accent" fontWeight={600}>
+							{searchQuery}
+						</Text>
+					</Heading>
+					<Button variant="link" color="accent" mb={4} _active={{}} onClick={resetSearch}>
+						Reset
+					</Button>
+				</Box>
 			)}
 			{formState.isSubmitting ? (
 				<Spinner color="accent" size="xl" />

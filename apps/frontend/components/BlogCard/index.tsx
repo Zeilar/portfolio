@@ -24,7 +24,7 @@ export default function BlogCard({ previewImage, minutes, title, tags, published
 				rounded="lg"
 				transitionDuration="0.5s"
 				overflow="hidden"
-				_hover={{ transform: "scale(1.01)", bgColor: "gray.600" }}
+				_hover={{ bgColor: "gray.600" }}
 			>
 				<Flex as="article" p={6} alignItems="flex-start">
 					<Box flexGrow={1}>
