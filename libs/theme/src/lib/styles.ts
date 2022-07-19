@@ -15,6 +15,8 @@ export const styles = {
 		},
 		"*, *::before, *::after": {
 			borderColor: "border",
+		},
+		"ul:not([role=list]), ul:not([role=list])": {
 			listStyleType: "none",
 		},
 		"svg, img": {

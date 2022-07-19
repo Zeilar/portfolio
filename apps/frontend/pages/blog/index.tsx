@@ -23,6 +23,8 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
+import Reader from "../../components/Reader";
+
 interface Fields {
 	search: string;
 }
@@ -104,6 +106,7 @@ export default function Blog(props: Props) {
 					))}
 				</Flex>
 			)}
+			<Reader document={posts[0].body} />
 		</Container>
 	);
 }
