@@ -1,4 +1,5 @@
-import { Text } from "@chakra-ui/react";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 interface Props {
 	code: string;
@@ -7,8 +8,18 @@ interface Props {
 
 export default function CodeBlock({ code, language }: Props) {
 	return (
-		<Text as="pre" p={6} rounded="lg" bgColor="gray.900">
+		<SyntaxHighlighter
+			language={language}
+			style={{
+				...atomOneDark,
+				hljs: {
+					background: "var(--chakra-colors-gray-900)",
+					borderRadius: "var(--chakra-radii-lg)",
+					padding: "var(--chakra-sizes-6)",
+				},
+			}}
+		>
 			{code}
-		</Text>
+		</SyntaxHighlighter>
 	);
 }
