@@ -70,7 +70,7 @@ export default function Blog(props: Props) {
 			<UnderlineHeader label="Blog" />
 			<FormControl as="form" onSubmit={handleSubmit(submit)} isInvalid={Boolean(formState.errors.search)} mb={8}>
 				<FormLabel>Search</FormLabel>
-				<Box pos="relative" width="25%">
+				<Box w="25%">
 					<Input
 						variant="filled"
 						placeholder="Hello world"
@@ -83,14 +83,14 @@ export default function Blog(props: Props) {
 				<FormErrorMessage>{formState.errors.search?.message}</FormErrorMessage>
 			</FormControl>
 			{searchQuery && (
-				<Box>
+				<Box mb={4}>
 					<Heading size="lg" fontWeight={500}>
 						Results for: &nbsp;
 						<Text as="span" color="accent" fontWeight={600}>
 							{searchQuery}
 						</Text>
 					</Heading>
-					<Button variant="link" color="accent" mb={4} _active={{}} onClick={resetSearch}>
+					<Button mt={2} variant="link" size="lg" color="accent" _active={{}} onClick={resetSearch}>
 						Reset
 					</Button>
 				</Box>
