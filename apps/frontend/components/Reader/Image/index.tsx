@@ -7,5 +7,5 @@ interface Props {
 }
 
 export default function Image(props: Props) {
-	return <NextImage {...props} />;
+	return <NextImage objectFit="cover" {...props} />;
 }
