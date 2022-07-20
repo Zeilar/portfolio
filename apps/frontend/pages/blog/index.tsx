@@ -21,7 +21,6 @@ import { useState } from "react";
 import { getReadingMinutes } from "../../common/helpers";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { Asset } from "../../types/asset";
 
 interface Fields {
@@ -35,14 +34,13 @@ interface Props {
 
 export default function Blog(props: Props) {
 	const [posts, setPosts] = useState(props.posts);
-	const { register, handleSubmit, formState, watch, reset } = useForm<Fields>({ defaultValues: { search: "" } });
+	const { register, handleSubmit, formState, reset } = useForm<Fields>({ defaultValues: { search: "" } });
 	const { replace, query } = useRouter();
 	const toast = useToast({ position: "top" });
-	const searchField = watch("search");
 	const searchQuery = query.search as string | undefined;
 
 	async function submit({ search }: Fields) {
-		if (formState.isSubmitting) {
+		if (formState.isSubmitting || !search) {
 			return;
 		}
 		try {
@@ -58,14 +56,11 @@ export default function Blog(props: Props) {
 		if (formState.isSubmitting) {
 			return;
 		}
+		const { posts } = await getPosts();
 		replace("");
 		reset();
+		setPosts(posts);
 	}
-
-	useEffect(() => {
-		submit({ search: searchField });
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchQuery]);
 
 	return (
 		<Container maxW="container.xl" mb={[6, "5rem"]}>

@@ -74,7 +74,7 @@ export async function getPosts(search = ""): Promise<{ posts: Post[]; assets: an
 	});
 	return {
 		posts,
-		assets: data.includes.Asset,
+		assets: data.includes?.Asset ?? null,
 	};
 }
 
