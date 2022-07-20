@@ -64,5 +64,4 @@ export default function CodeBlock({ code, language }: Props) {
 			)}
 		</Highlight>
 	);
-	// return <Highlight language={language} code={code.replaceAll("\t", "  ")} />;
 }
