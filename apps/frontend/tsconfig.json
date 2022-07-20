@@ -9,6 +9,7 @@
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true,
+		"lib": ["es2021"],
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"incremental": true
