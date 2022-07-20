@@ -10,9 +10,26 @@ export function clamp(number: number, min: number, max: number) {
 }
 
 export function getReadingMinutes({ content }: RTDocument) {
-	const words = content.reduce(
-		(total, acc) => (acc.nodeType === "paragraph" ? total + acc.content[0].value.split(" ").length : total),
-		0
-	);
+	const words = content.reduce((total, current) => {
+		if (current.nodeType !== "paragraph") {
+			return total;
+		}
+		return (
+			total +
+			current.content.reduce((total, current) => {
+				switch (current.nodeType) {
+					case "hyperlink":
+						return (
+							total +
+							current.content.reduce((total, current) => total + current.value.split(" ").length, 0)
+						);
+					case "text":
+						return total + current.value.split(" ").length;
+					default:
+						return total;
+				}
+			}, 0)
+		);
+	}, 0);
 	return Math.ceil(words / 200);
 }
