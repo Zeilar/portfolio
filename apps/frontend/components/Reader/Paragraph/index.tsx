@@ -6,7 +6,7 @@ import Text from "../Text";
 
 interface Props {
 	paragraph: RTParagraph;
-	entries: Entry[];
+	entries?: Entry[];
 }
 
 export default function Paragraph({ paragraph, entries }: Props) {
@@ -19,6 +19,9 @@ export default function Paragraph({ paragraph, entries }: Props) {
 					case "hyperlink":
 						return <HyperLink key={i} hyperLink={node} />;
 					case "embedded-entry-inline":
+						if (!entries) {
+							return null;
+						}
 						// eslint-disable-next-line no-case-declarations
 						const codeBlock: Entry | undefined = entries.find(
 							entry => entry.sys.id === node.data.target.sys.id
