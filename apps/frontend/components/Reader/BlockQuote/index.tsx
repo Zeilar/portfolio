@@ -11,7 +11,8 @@ export default function BlockQuote({ blockQuote }: Props) {
 		<Text
 			as="blockquote"
 			borderLeftWidth={4}
-			borderLeftColor="border"
+			borderLeftColor="accent"
+			bgColor="blackAlpha.300"
 			py={2}
 			px={4}
 			mb={2}
