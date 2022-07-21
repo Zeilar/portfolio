@@ -5,7 +5,7 @@ export const styles = {
 		},
 		"#__next": {
 			minH: "100vh",
-			pt: [125, 200],
+			pt: ["calc(75px + var(--chakra-sizes-6))", 200],
 			display: "flex",
 			flexDir: "column",
 		},

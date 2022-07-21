@@ -1,23 +1,35 @@
-import { Box, Container, Flex, Icon, Link, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Container, Flex, Icon, Link, useBreakpoint } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import StyledLink from "./StyledLink";
 import NextLink from "next/link";
 import { ReactComponent as BrandIcon } from "../../assets/svgs/brand.svg";
+import Mobile from "./Mobile";
+
+const THRESHOLD = 100;
 
 export default function Navbar() {
 	const [isAnimated, setIsAnimated] = useState(false);
-	const threshold = useBreakpointValue({ base: 25, sm: 100 }) ?? 100;
+	const breakpoint = useBreakpoint();
+
+	const isMobile = breakpoint === "base";
 
 	useEffect(() => {
-		setIsAnimated(window.scrollY > threshold);
+		if (isMobile) {
+			return;
+		}
+		setIsAnimated(window.scrollY > THRESHOLD);
 		function onScroll() {
-			setIsAnimated(window.scrollY > threshold);
+			setIsAnimated(window.scrollY > THRESHOLD);
 		}
 		window.addEventListener("scroll", onScroll);
 		return () => {
 			window.removeEventListener("scroll", onScroll);
 		};
-	}, [threshold]);
+	}, [isMobile]);
+
+	if (isMobile) {
+		return <Mobile />;
+	}
 
 	return (
 		<Box
@@ -45,13 +57,13 @@ export default function Navbar() {
 			<Container maxW="container.xl" h="100%">
 				<Flex as="nav" alignItems="center" h="100%">
 					<Flex as="ul" gap="3.5rem" alignItems="center">
-						<Box as="li">
+						<li>
 							<NextLink href="/" passHref>
 								<Link display="flex" userSelect="none" fontSize="4xl" color="accent">
 									<Icon as={BrandIcon} w="1em" h="1em" />
 								</Link>
 							</NextLink>
-						</Box>
+						</li>
 						<li>
 							<StyledLink href="/">Home</StyledLink>
 						</li>

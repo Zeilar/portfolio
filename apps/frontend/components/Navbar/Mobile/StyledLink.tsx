@@ -15,7 +15,9 @@ export default function StyledLink({ href, ...props }: Props) {
 			<Link
 				aria-current={active ? "page" : undefined}
 				fontWeight={500}
-				fontSize="lg"
+				fontSize="xl"
+				px={6}
+				py={3}
 				userSelect="none"
 				color={active ? "purple.400" : "gray.200"}
 				_focusVisible={{ outline: 0 }}
