@@ -55,7 +55,7 @@ export default function Mobile() {
 						_after={{
 							content: `""`,
 							pos: "absolute",
-							opacity: 0.9,
+							opacity: 0.95,
 							bgColor: "gray.700",
 							backdropFilter: "blur(5px)",
 							w: "100%",
