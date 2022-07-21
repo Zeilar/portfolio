@@ -16,6 +16,7 @@ export default function StyledLink({ href, ...props }: Props) {
 				aria-current={active ? "page" : undefined}
 				fontWeight={500}
 				fontSize="xl"
+				w="100%"
 				px={6}
 				py={3}
 				userSelect="none"
