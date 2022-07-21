@@ -37,6 +37,7 @@ export default function CodeBlock({ code, language }: Props) {
 					{supportsNavigator && (
 						<Tooltip placement="top" label="Copy" closeOnClick={false}>
 							<IconButton
+								size="sm"
 								aria-label="Copy code"
 								icon={<CopyIcon />}
 								right={4}
