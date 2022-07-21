@@ -36,8 +36,8 @@ export default function Mobile() {
 						aria-label="Toggle menu"
 						variant="unstyled"
 						as={HamburgerIcon}
-						color="gray.200"
 						onClick={onToggle}
+						color={isOpen ? "accent" : "gray.200"}
 						_hover={{ color: "accent" }}
 					/>
 					<Flex
