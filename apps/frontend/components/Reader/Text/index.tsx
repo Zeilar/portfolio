@@ -15,6 +15,7 @@ export default function Text({ text }: Props) {
 			textDecor={isUnderline ? "underline" : "inherit"}
 			fontWeight={isBold ? 700 : "inherit"}
 			mb={2}
+			_last={{ mb: 0 }}
 		>
 			{text.value}
 		</ChakraText>
