@@ -1,39 +1,34 @@
-import { Box, Container, ContainerProps, Flex, Icon, Link, useBreakpoint } from "@chakra-ui/react";
-import { useEffect, useMemo, useState } from "react";
+import { Box, Container, Flex, Icon, Link, useBreakpointValue } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import StyledLink from "./StyledLink";
 import NextLink from "next/link";
 import { ReactComponent as BrandIcon } from "../../assets/svgs/brand.svg";
 
 export default function Navbar() {
 	const [isAnimated, setIsAnimated] = useState(false);
-	const breakpoint = useBreakpoint({ ssr: true });
-	const THRESHOLD = useMemo(() => (breakpoint === "base" ? 25 : 100), [breakpoint]);
+	const threshold = useBreakpointValue({ base: 25, sm: 100 }) ?? 100;
 
 	useEffect(() => {
-		setIsAnimated(window.scrollY > THRESHOLD);
+		setIsAnimated(window.scrollY > threshold);
 		function onScroll() {
-			setIsAnimated(window.scrollY > THRESHOLD);
+			setIsAnimated(window.scrollY > threshold);
 		}
 		window.addEventListener("scroll", onScroll);
 		return () => {
 			window.removeEventListener("scroll", onScroll);
 		};
-	}, [THRESHOLD]);
-
-	const animatedStyles = useMemo<ContainerProps>(
-		() => (isAnimated ? { h: 75, boxShadow: "md" } : { h: 100 }),
-		[isAnimated]
-	);
+	}, [threshold]);
 
 	return (
 		<Box
 			as="header"
 			zIndex={50}
 			pos="fixed"
-			transition="0.5s ease"
+			transition="0.25s ease"
 			top={0}
-			h={100}
 			w="100%"
+			h={isAnimated ? 85 : 100}
+			boxShadow={isAnimated ? "md" : "none"}
 			_after={{
 				content: `""`,
 				pos: "absolute",
@@ -44,9 +39,8 @@ export default function Navbar() {
 				h: "100%",
 				top: 0,
 				zIndex: -1,
-				transition: "0.25s ease",
+				transition: "inherit",
 			}}
-			{...animatedStyles}
 		>
 			<Container maxW="container.xl" h="100%">
 				<Flex as="nav" alignItems="center" h="100%">

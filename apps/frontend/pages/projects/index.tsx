@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Button, Container, Flex, Grid, Heading, Link, Tag, Text } from "@chakra-ui/react";
+import { Button, Container, Flex, Grid, Heading, Link, Tag, Text, useBreakpoint } from "@chakra-ui/react";
 import { Asset } from "../../types/asset";
 import { GetServerSidePropsResult } from "next";
 import Head from "next/head";
@@ -17,6 +17,7 @@ interface Props {
 }
 
 export default function Projects({ projects }: Props) {
+	const breakpoint = useBreakpoint({ ssr: true });
 	return (
 		<Container maxW="container.xl" mb={[6, "5rem"]}>
 			<Head>
@@ -38,7 +39,7 @@ export default function Projects({ projects }: Props) {
 						bgColor="gray.700"
 						rounded="lg"
 					>
-						<Flex flexDir="column" p={10} order={[1, 0]}>
+						<Flex flexDir="column" p={[6, 10]} order={[1, 0]}>
 							<Heading fontWeight={500} size="xl" mb={2}>
 								{project.title}
 							</Heading>
@@ -74,19 +75,25 @@ export default function Projects({ projects }: Props) {
 							>
 								{project.description}
 							</Text>
-							<Flex mt="auto" gap={2} alignItems="center">
+							<Flex mt="auto" gap={4} alignItems="center" flexDir={["column", "row"]}>
 								<NextLink passHref href={project.url}>
-									<Link isExternal _hover={{ textDecor: "none" }}>
-										<Button variant="primary-icon">
+									<Link isExternal width={["100%", "auto"]} _hover={{ textDecor: "none" }}>
+										<Button variant="primary-icon" width={["100%", "auto"]}>
 											<ExternalLinkIcon mr={3} fontSize="xl" />
 											View app
 										</Button>
 									</Link>
 								</NextLink>
 								<NextLink passHref href={`/projects/${project.slug}`}>
-									<Link paddingInline={4} color="text">
-										Read more
-									</Link>
+									{breakpoint === "base" ? (
+										<Button py={6} as={Link} variant="secondary" w="100%">
+											Read more
+										</Button>
+									) : (
+										<Link paddingInline={4} color="text" textAlign="center">
+											Read more
+										</Link>
+									)}
 								</NextLink>
 							</Flex>
 						</Flex>

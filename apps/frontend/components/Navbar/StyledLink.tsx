@@ -9,29 +9,17 @@ interface Props {
 
 export default function StyledLink({ href, ...props }: Props) {
 	const router = useRouter();
+	const active = router.pathname === href;
 	return (
 		<NextLink passHref href={href}>
 			<Link
-				aria-current={router.pathname === href ? "page" : undefined}
-				pos="relative"
-				py={4}
+				aria-current={active ? "page" : undefined}
 				fontWeight={500}
-				color="gray.200"
 				fontSize="lg"
 				userSelect="none"
-				_after={{
-					content: `""`,
-					pos: "absolute",
-					bottom: 0,
-					left: 0,
-					height: "2px",
-					w: 0,
-					bgColor: "accent",
-					rounded: "full",
-				}}
-				_activeLink={{ color: "text", _after: { w: "100%" } }}
-				_hover={{ color: "text", _after: { w: "100%", transition: "0.25s" } }}
+				color={active ? "purple.400" : "gray.200"}
 				_focusVisible={{ outline: 0 }}
+				_hover={{ color: !active ? "purple.500" : undefined }}
 				{...props}
 			/>
 		</NextLink>
