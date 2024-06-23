@@ -13,10 +13,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const { email, message, name }: Fields = JSON.parse(req.body);
 	await sendGrid.send({
 		from: {
-			email: "noreply@angelin.dev",
+			email: "philip@angelin.dev",
 			name: `${name} <${email}>`,
 		},
-		to: "philip@angelin.dev",
+		to: "philip_angelin@hotmail.com",
 		subject: "Hello",
 		html: message,
 	});

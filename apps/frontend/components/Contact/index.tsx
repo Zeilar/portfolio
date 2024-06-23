@@ -50,7 +50,7 @@ export default function Contact() {
 	const messageLength = watch("message").length;
 
 	return (
-		<Box as="section" py={[6, "5rem"]} bgColor="gray.700" onSubmit={handleSubmit(onSubmit)}>
+		<Box as="section" py={[6, "5rem"]} bgColor="gray.800" onSubmit={handleSubmit(onSubmit)}>
 			<Container maxW="container.xl" as="form">
 				<UnderlineHeader label="Contact" />
 				<Flex gap={[4, 20]} flexDir={["column", "row"]}>

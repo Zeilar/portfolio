@@ -15,14 +15,12 @@ import angelinOg from "../assets/images/angelin-og.png";
 import { GetServerSidePropsResult } from "next";
 import Contact from "../components/Contact";
 import Head from "next/head";
-import Mastery from "../components/Mastery";
 
 interface Props {
 	featuredProjects: Project[];
-	technologies: Technology[];
 }
 
-export default function Index({ featuredProjects, technologies }: Props) {
+export default function Index({ featuredProjects }: Props) {
 	const breakpoint = useBreakpoint();
 	return (
 		<>
@@ -118,7 +116,6 @@ export default function Index({ featuredProjects, technologies }: Props) {
 					</Flex>
 				</Container>
 			</Box>
-			<Mastery technologies={technologies} />
 			<Contact />
 		</>
 	);
@@ -145,18 +142,10 @@ export async function getServerSideProps(): Promise<GetServerSidePropsResult<Pro
 	const technologiesFetcher = getTechnologies();
 	const technologiesResponse = await technologiesFetcher();
 	const technologiesData = await technologiesResponse.json();
-	const technologies: Technology[] = technologiesData.items.map((item: any) => {
-		const asset = technologiesData.includes.Asset.find((asset: any) => item.fields.image.sys.id === asset.sys.id);
-		return {
-			...item.fields,
-			image: `https:${asset.fields.file.url}`,
-		};
-	});
 
 	return {
 		props: {
 			featuredProjects,
-			technologies,
 		},
 	};
 }
